@@ -4901,22 +4901,22 @@ textarea:focus-visible {
   transform: translateY(-1px);
 }
 .hero-section-5 {
-  width: min(100% - 28px, 1480px);
+  width: 100%;
   height: clamp(720px, 96vh, 900px);
   min-height: 720px;
   margin: 0 auto 0;
   padding: 0 clamp(28px, 4vw, 58px) 118px;
-  border: 1px solid rgba(255,255,255,0.08);
-  border-radius: clamp(28px, 4vw, 56px);
+  border: 0;
+  border-radius: 0;
   background: #050509;
-  box-shadow: 0 28px 100px rgba(0,0,0,0.46);
+  box-shadow: none;
   isolation: isolate;
   overflow: visible;
   margin-bottom: 42px;
 }
 .hero-section-5 .hero-bg {
   overflow: hidden;
-  border-radius: inherit;
+  border-radius: 0;
   background: #050509;
 }
 .hero-section-5 .hero-video {
@@ -5179,11 +5179,12 @@ textarea:focus-visible {
     display: none;
   }
   .hero-section-5 {
-    width: min(100% - 20px, 720px);
+    width: 100%;
     height: auto;
     min-height: 760px;
     padding: 0 24px 140px;
     margin-bottom: 42px;
+    border-radius: 0;
   }
   .hero-modern-content {
     padding-top: 240px;
@@ -5230,7 +5231,7 @@ textarea:focus-visible {
   }
   .hero-section-5 {
     padding: 0 18px 130px;
-    border-radius: 26px;
+    border-radius: 0;
     margin-bottom: 42px;
   }
   .header {
