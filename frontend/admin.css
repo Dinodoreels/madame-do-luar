@@ -301,6 +301,13 @@ td small { color: var(--faint); }
 .brand strong { display: block; font-size: 0.95rem; }
 .brand small { color: var(--faint); font-size: 0.74rem; }
 
+.brand-logo-img,
+.brand-mark,
+.login-mark {
+  border-radius: 50%;
+  object-fit: cover;
+}
+
 .nav {
   display: grid;
   gap: 14px;
@@ -933,4 +940,24 @@ body.is-loading .view.active {
   .icon-button,
   .modal-actions button { width: 100%; }
   .prompt-modal textarea { min-height: 240px; }
+}
+
+/* Final brand overrides */
+.brand .brand-mark,
+.login-panel .login-mark {
+  display: inline-block;
+  width: 52px;
+  height: 52px;
+  padding: 0;
+  border: 1px solid rgba(234, 217, 173, 0.38);
+  border-radius: 50%;
+  object-fit: cover;
+  background: rgba(234, 217, 173, 0.055);
+  box-shadow: 0 0 24px rgba(216, 183, 92, 0.14);
+}
+
+.brand .brand-mark {
+  width: 42px;
+  height: 42px;
+  flex: 0 0 42px;
 }

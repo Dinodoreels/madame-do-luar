@@ -56,6 +56,61 @@
   --focus-ring: 0 0 0 3px rgba(240,208,96,0.28);
 }
 
+/* Brand logo rollout */
+.brand-logo-img,
+.logo-icon,
+.footer-brand-mark,
+.auth-brand-logo,
+.perfil-brand-logo {
+  display: inline-block;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.logo .logo-icon {
+  position: static;
+  width: 38px;
+  height: 38px;
+  flex: 0 0 38px;
+  border: 1px solid rgba(244, 201, 89, 0.42);
+  background: rgba(212, 175, 55, 0.08);
+  box-shadow: 0 0 22px rgba(212, 175, 55, 0.18);
+}
+
+.logo .logo-icon::before,
+.logo .logo-icon::after {
+  content: none;
+}
+
+.footer-brand .footer-brand-mark {
+  width: 48px;
+  height: 48px;
+  flex: 0 0 48px;
+  padding: 0;
+  border-radius: 50%;
+  border: 1px solid rgba(244, 201, 89, 0.42);
+  background: rgba(212, 175, 55, 0.08);
+}
+
+#authModal .auth-brand-mark,
+.perfil-brand-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+}
+
+#authModal .auth-brand-mark {
+  padding: 6px 12px 6px 7px;
+}
+
+.auth-brand-logo,
+.perfil-brand-logo {
+  width: 28px;
+  height: 28px;
+  flex: 0 0 28px;
+  border: 1px solid rgba(244, 201, 89, 0.35);
+}
+
 /* ── Reset ── */
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 html { scroll-behavior: smooth; }
@@ -5291,4 +5346,53 @@ textarea:focus-visible {
 .perfil-cancel-reason option {
   background: #111114;
   color: var(--branco);
+}
+
+/* Final brand overrides */
+.logo .logo-icon {
+  position: static;
+  width: 38px;
+  height: 38px;
+  flex: 0 0 38px;
+  border: 1px solid rgba(244, 201, 89, 0.42);
+  border-radius: 50%;
+  object-fit: cover;
+  background: rgba(212, 175, 55, 0.08);
+  box-shadow: 0 0 22px rgba(212, 175, 55, 0.18);
+}
+
+.logo .logo-icon::before,
+.logo .logo-icon::after {
+  content: none;
+}
+
+.footer-brand .footer-brand-mark {
+  width: 48px;
+  height: 48px;
+  flex: 0 0 48px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 1px solid rgba(244, 201, 89, 0.42);
+  background: rgba(212, 175, 55, 0.08);
+}
+
+#authModal .auth-brand-mark,
+.perfil-brand-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+}
+
+#authModal .auth-brand-mark {
+  padding: 6px 12px 6px 7px;
+}
+
+.auth-brand-logo,
+.perfil-brand-logo {
+  width: 28px;
+  height: 28px;
+  flex: 0 0 28px;
+  border: 1px solid rgba(244, 201, 89, 0.35);
+  border-radius: 50%;
+  object-fit: cover;
 }
