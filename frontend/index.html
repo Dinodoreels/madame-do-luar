@@ -17,7 +17,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700;900&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="style.css?v=20260715-brand-logo" />
+  <link rel="stylesheet" href="style.css?v=20260715-hero-header-nav" />
 </head>
 <body>
   <a class="skip-link" href="#consulta">Pular para a consulta</a>
@@ -26,23 +26,19 @@
   <!-- ══ HEADER ══ -->
   <header class="header" id="header">
     <div class="header-inner">
-      <div class="logo">
-        <img class="logo-icon brand-logo-img" src="/assets/brand/madame-logo.png" alt="" />
-        <span class="logo-text">Madame do Luar</span>
-      </div>
-      <div class="online-badge">
-        <span class="online-dot"></span>
-        <span>Portal seguro</span>
-      </div>
       <nav class="header-nav" aria-label="Navegacao principal">
+        <a href="#hero">Inicio</a>
         <a href="#carta-do-dia">Carta do dia</a>
-        <a href="#consulta">Consulta</a>
-        <a href="#planos">Premium</a>
+        <a href="#rituais">Rituais</a>
+        <a href="#consulta">Biblioteca</a>
+        <a href="#planos">Planos</a>
+        <a href="#footer">Sobre</a>
       </nav>
       <!-- Estado: visitante -->
       <div id="headerVisitante">
         <a href="#" class="btn btn-ghost btn-sm" onclick="abrirAuth('login')">Entrar</a>
         <a href="#" class="btn btn-primary btn-sm" onclick="abrirAuth('cadastro')">Criar Conta</a>
+        <button class="header-plus-button" type="button" onclick="abrirAuth('cadastro')" aria-label="Criar conta">+</button>
       </div>
       <!-- Estado: logado (oculto até login) -->
       <div id="headerLogado" style="display:none" class="header-user">
@@ -684,7 +680,7 @@
     </div>
   </section>
 
-  <footer class="footer footer-premium">
+  <footer class="footer footer-premium" id="footer">
     <div class="footer-premium-glow" aria-hidden="true"></div>
     <div class="footer-premium-inner">
       <div class="footer-brand-panel footer-reveal" style="--footer-delay: 0s;">
