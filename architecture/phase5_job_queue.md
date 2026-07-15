@@ -15,7 +15,7 @@ Motivos:
 
 - `app/modules/automation/job_queue.py`: service de fila, retries, idempotencia, dead-letter e alerta de fila travada.
 - `tools/job_worker.py`: worker CLI.
-- `scheduler_job_worker.bat`: launcher local Windows.
+- `scripts/windows/scheduler_job_worker.bat`: launcher local Windows.
 - `architecture/migration_phase5_job_queue.sql`: migration de referencia para indices e checks.
 - `POST /api/readings/enqueue`: cria leitura pendente e enfileira IA.
 - `GET /api/readings/jobs/{queue_id}`: consulta status da leitura enfileirada.

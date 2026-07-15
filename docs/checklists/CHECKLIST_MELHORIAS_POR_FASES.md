@@ -355,7 +355,7 @@ Objetivo: tirar IA, emails, WhatsApp e automacoes pesadas da requisicao principa
 - Decisao tecnica: usar fila simples baseada em `reprocess_queue` nesta fase, evitando Redis/Celery antes de infraestrutura dedicada.
 - Criado `app/modules/automation/job_queue.py` com enqueue, idempotencia por `payload.idempotency_key`, retries, dead-letter, auditoria e alerta de fila travada.
 - Criado `tools/job_worker.py` com modo loop, `--once`, `--dry-run`, `--limit` e intervalo configuravel.
-- Criado `scheduler_job_worker.bat`.
+- Criado `scripts/windows/scheduler_job_worker.bat`.
 - Criado `architecture/migration_phase5_job_queue.sql`.
 - Criado `app/modules/automation/service.py` separando eventos transacionais e marketing.
 - Criados endpoints:

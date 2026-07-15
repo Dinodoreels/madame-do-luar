@@ -16,7 +16,7 @@ Write-Host ""
 # ── Tarefa 1: Retorno Automatico (a cada 1 hora) ──
 Write-Host "Registrando Tarefa 1: Retorno Automatico (a cada hora)..."
 
-$batRetorno = "$PROJETO\scheduler_retorno.bat"
+$batRetorno = "$PROJETO\scripts\windows\scheduler_retorno.bat"
 
 $acao1    = New-ScheduledTaskAction -Execute "cmd.exe" -Argument ("/c `"" + $batRetorno + "`"")
 $gatilho1 = New-ScheduledTaskTrigger -RepetitionInterval (New-TimeSpan -Hours 1) -Once -At (Get-Date)
@@ -58,7 +58,7 @@ Write-Host ""
 # Tarefa 3: Carta do Dia Renovada as 08:05
 Write-Host "Registrando Tarefa 3: Carta do Dia Renovada (08:05 todo dia)..."
 
-$batCartaDia = "$PROJETO\scheduler_carta_do_dia.bat"
+$batCartaDia = "$PROJETO\scripts\windows\scheduler_carta_do_dia.bat"
 
 $acao3    = New-ScheduledTaskAction -Execute "cmd.exe" -Argument ("/c `"" + $batCartaDia + "`"")
 $gatilho3 = New-ScheduledTaskTrigger -Daily -At "08:05"

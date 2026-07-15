@@ -323,9 +323,9 @@ Scripts:
 - `tools/automation_worker.py`
 - `tools/daily_card_renewal.py`
 - `tools/flow_retorno_24h.py`
-- `scheduler_automacoes_worker.bat`
-- `scheduler_carta_do_dia.bat`
-- `setup_agendamentos.ps1`
+- `scripts/windows/scheduler_automacoes_worker.bat`
+- `scripts/windows/scheduler_carta_do_dia.bat`
+- `scripts/windows/setup_agendamentos.ps1`
 
 Ponto importante:
 
@@ -657,4 +657,3 @@ python -B tools/validate_public_sale_readiness.py --env-file .env.production --l
 ```
 
 O sistema so deve ser considerado pronto para trafego pago quando esse comando retornar sem `FAIL` e sem `BLOCKED`.
-

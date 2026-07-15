@@ -8,8 +8,10 @@ Plataforma web de tarot com IA, conta de usuario, creditos, pagamentos, rituais,
 app/                 Backend FastAPI modular
 frontend/            Frontend estatico servido pelo backend
 tools/               Scripts operacionais, validadores, workers e backups
+scripts/             Launchers Windows e scripts de deploy
 architecture/        POPs, contratos, migrations e runbooks tecnicos
 docs/checklists/     Checklists de fases e continuidade
+docs/product/        Persona, plano de produto e especificacoes funcionais
 docs/reports/        Auditorias e relatorios publicaveis
 prompts/             Prompts de IA
 tests/               Testes Playwright

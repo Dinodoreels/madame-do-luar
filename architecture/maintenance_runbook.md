@@ -39,7 +39,7 @@ Use o painel admin em `Configuracoes` para bloquear novas leituras e cobrancas P
 
 Mantenha apenas um worker por ambiente:
 
-- Local: `scheduler_automacoes_worker.bat` ou processo manual.
+- Local: `scripts/windows/scheduler_automacoes_worker.bat` ou processo manual.
 - Producao: Render worker `madame-do-luar-worker`.
 
 Duplicar workers pode enviar mensagens duplicadas.

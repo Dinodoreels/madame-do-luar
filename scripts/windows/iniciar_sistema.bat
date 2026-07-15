@@ -4,7 +4,7 @@ REM  Madame do Luar - Iniciar sistema web
 REM  Sobe a API FastAPI e abre o app no navegador.
 REM ============================================================
 
-cd /d "%~dp0"
+cd /d "%~dp0..\.."
 
 echo.
 echo ========================================

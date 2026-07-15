@@ -77,7 +77,7 @@ def _validate_routes_and_pages() -> None:
 def _validate_deploy_artifacts() -> None:
     required_files = (
         "render.yaml",
-        "deploy_render.ps1",
+        "scripts/deploy/deploy_render.ps1",
         ".env.production.example",
         "tools/predeploy_check.py",
         "tools/deploy_smoke_test.py",

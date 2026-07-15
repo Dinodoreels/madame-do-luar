@@ -20,7 +20,7 @@ def chamar_madame_do_luar(prompt_base_path, **kwargs):
     
     # Carrega a Constituição da Persona
     project_root = os.path.dirname(os.path.dirname(__file__))
-    persona_path = os.path.join(project_root, "persona.md")
+    persona_path = os.path.join(project_root, "docs", "product", "persona.md")
     
     try:
         with open(persona_path, "r", encoding="utf-8") as f:

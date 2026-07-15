@@ -63,7 +63,7 @@ intervencao manual e deploy HTTPS no dominio final, porque `APP_BASE_URL` e
 - [x] Blueprint `render.yaml` com web, worker e cron.
 - [x] Secrets fora do codigo via `sync: false` e `generateValue`.
 - [x] CORS de producao limitado a dominios HTTPS.
-- [x] Script de pre-deploy em `deploy_render.ps1`.
+- [x] Script de pre-deploy em `scripts/deploy/deploy_render.ps1`.
 - [x] Smoke test pos-deploy em `tools/deploy_smoke_test.py`.
 - [ ] Blueprint sincronizado na conta Render.
 - [ ] Dominios `madamedoluar.com.br` e `www.madamedoluar.com.br` apontados no DNS.

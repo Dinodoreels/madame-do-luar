@@ -10,9 +10,9 @@ blueprint.
 
 ## Fase 0 — Inicialização
 - Criar a estrutura de pastas do projeto local (`architecture/`,
-`tools/`, `prompts/`, `.tmp/`) e os documentos base (`task_plan.md`,
-`findings.md`, `progress.md`, `gemini.md`).
-- Carregar o Persona da Madame do Luar (ver `persona.md`) para
+`tools/`, `prompts/`, `.tmp/`) e os documentos base (`docs/product/task_plan.md`,
+`docs/internal-local/findings.md`, `docs/internal-local/progress.md`, `docs/product/gemini.md`).
+- Carregar o Persona da Madame do Luar (ver `docs/product/persona.md`) para
 orientar o comportamento da IA.
 - Preencher o `.env` com chaves de API (OpenAI/Gemini, Supabase,
 gateway de pagamentos, API de WhatsApp). Não colocar chaves em código.
@@ -28,12 +28,12 @@ pagamento, API de WhatsApp, API de e‑mail, armazenamento de PDF/áudio).
 arquivo de cartas do tarot; biblioteca de rituais com PDF + áudio).
 - **Qual é o payload final?** (Mensagens de leitura estruturadas, PDF/áudio de
 rituais, e‑mails e mensagens de WhatsApp personalizados).
-- **Quais regras comportamentais o sistema deve seguir?** (Vide `persona.md`;
+- **Quais regras comportamentais o sistema deve seguir?** (Vide `docs/product/persona.md`;
 tom acolhedor e místico, segurança de IA, não promover medicina ou
 finanças, privacidade de dados).
 
 **Ações:**
-- Definir o esquema de dados em `gemini.md` antes de qualquer
+- Definir o esquema de dados em `docs/product/gemini.md` antes de qualquer
 codificação. O modelo inicial inclui tabelas de `users`, `questions`,
 `daily_cards`, `readings`, `cards`, `subscriptions`, `payments`,
 `rituals`, `ritual_purchases`, `message_events` e `marketing_sequences`.
@@ -99,7 +99,7 @@ disparo.
 - Auditar o sistema: registrar logs, tratar exceções e validar
 segurança (limites de requisição, privacidade de dados, conformidade
 LGPD/GDPR).
-- Documentar procedimentos de manutenção em `gemini.md` para
+- Documentar procedimentos de manutenção em `docs/product/gemini.md` para
 garantir a continuidade.
 - Registrar no `progress.md` a conclusão da Fase 5.
 

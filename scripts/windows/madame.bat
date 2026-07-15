@@ -49,6 +49,6 @@ if "%opcao%"=="4" (
 if "%opcao%"=="5" (
     echo Iniciando sistema web...
     cd /d "%PROJETO%"
-    call iniciar_sistema.bat
+    call "%PROJETO%\scripts\windows\iniciar_sistema.bat"
 )
 if "%opcao%"=="0" exit

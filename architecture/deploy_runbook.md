@@ -102,13 +102,13 @@ Regra operacional: manter apenas um worker ativo por ambiente para evitar dispar
 Pre-deploy local:
 
 ```powershell
-.\deploy_render.ps1 -EnvFile .env.production.example -AllowPlaceholders
+.\scripts\deploy\deploy_render.ps1 -EnvFile .env.production.example -AllowPlaceholders
 ```
 
 Pre-deploy real antes de publicar:
 
 ```powershell
-.\deploy_render.ps1 -EnvFile .env.production
+.\scripts\deploy\deploy_render.ps1 -EnvFile .env.production
 ```
 
 Pos-deploy:

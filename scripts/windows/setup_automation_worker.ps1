@@ -2,7 +2,7 @@
 # Execute como administrador no PowerShell quando quiser ativar o worker no Windows.
 
 $PROJETO = "d:\ANTIGRAVTY PROJETOS\AGENTS\MADAME DO LUAR"
-$batWorker = "$PROJETO\scheduler_automacoes_worker.bat"
+$batWorker = "$PROJETO\scripts\windows\scheduler_automacoes_worker.bat"
 
 $acao = New-ScheduledTaskAction -Execute "cmd.exe" -Argument ("/c `"" + $batWorker + "`"")
 $gatilho = New-ScheduledTaskTrigger -AtStartup
