@@ -1,0 +1,1210 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Madame do Luar — Leituras de Tarot Ancestral</title>
+  <meta name="description" content="Consulte as cartas do tarot com Madame do Luar. Leituras personalizadas de Passado, Presente e Futuro." />
+  <meta name="theme-color" content="#0d0518" />
+  <link rel="canonical" href="/" />
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="Madame do Luar - Leituras de Tarot Ancestral" />
+  <meta property="og:description" content="Carta do dia, leitura de tres cartas, historico protegido e pagamento seguro." />
+  <meta property="og:image" content="/assets/optimized/hero-fallback.webp" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700;900&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css?v=20260519-credit-panel" />
+</head>
+<body>
+  <a class="skip-link" href="#consulta">Pular para a consulta</a>
+  <div class="scroll-progress-bar" id="scrollProgress"></div>
+
+  <!-- ══ HEADER ══ -->
+  <header class="header" id="header">
+    <div class="header-inner">
+      <div class="logo">
+        <span class="logo-icon">&#127769;</span>
+        <span class="logo-text">Madame do Luar</span>
+      </div>
+      <div class="online-badge">
+        <span class="online-dot"></span>
+        <span>Portal seguro</span>
+      </div>
+      <nav class="header-nav" aria-label="Navegacao principal">
+        <a href="#carta-do-dia">Carta do dia</a>
+        <a href="#consulta">Consulta</a>
+        <a href="#planos">Premium</a>
+      </nav>
+      <!-- Estado: visitante -->
+      <div id="headerVisitante">
+        <a href="#" class="btn btn-ghost btn-sm" onclick="abrirAuth('login')">Entrar</a>
+        <a href="#" class="btn btn-primary btn-sm" onclick="abrirAuth('cadastro')">Criar Conta</a>
+      </div>
+      <!-- Estado: logado (oculto até login) -->
+      <div id="headerLogado" style="display:none" class="header-user">
+        <button class="header-credits-badge" id="headerCreditsBadge" onclick="abrirPerfil('creditos')" aria-label="Abrir saldo de creditos">
+          <span>Saldo</span>
+          <strong id="headerCreditsSaldo">0</strong>
+          <small>creditos</small>
+        </button>
+        <button class="user-profile-trigger" onclick="abrirPerfil()" aria-label="Abrir perfil">
+          <span class="avatar-shell header-avatar">
+            <img id="headerAvatarImg" class="avatar-image" src="" alt="" hidden />
+            <span class="avatar-fallback" id="headerAvatarFallback">M</span>
+          </span>
+          <span class="avatar-status"><span class="sr-only">Online</span></span>
+        </button>
+        <button class="header-user-nome" id="headerNome" onclick="abrirPerfil()">Minha conta</button>
+        <a class="btn btn-ghost btn-sm header-admin-link admin-only-link" id="headerAdminLink" href="/admin.html" onclick="abrirPainelAdmin(event)" style="display:none">Painel Admin</a>
+        <button class="btn btn-ghost btn-sm" onclick="logout()">Sair</button>
+      </div>
+    </div>
+  </header>
+
+  <!-- ══ HERO ══ -->
+  <section class="hero hero-section-5" id="hero">
+    <div class="hero-bg">
+      <video class="hero-video" muted loop playsinline preload="none" poster="/assets/optimized/hero-fallback.webp" aria-hidden="true">
+        <source data-src="/imagems/VIDEO%20hero/1.mp4" type="video/mp4" />
+      </video>
+      <div class="hero-video-overlay"></div>
+      <div class="star-field" id="starField"></div>
+      <div class="nebula nebula-1"></div>
+      <div class="nebula nebula-2"></div>
+    </div>
+    <div class="hero-modern-content">
+      <p class="hero-eyebrow">&#10024; Tarot online com IA, historico e creditos reais</p>
+      <h1 class="hero-title">
+        Decisoes mais claras com a
+        <span class="hero-title-gold">Madame do Luar</span>
+      </h1>
+      <p class="hero-subtitle">
+        Consulte as cartas, receba uma leitura personalizada e transforme duvidas em proximos passos com uma experiencia segura, fluida e espiritual.
+      </p>
+      <div class="hero-ctas">
+        <a href="#consulta" class="btn btn-primary btn-lg btn-primary-hero" onclick="authGuard(event,'consulta')"><span>Comecar consulta</span><span class="hero-arrow">&#8594;</span></a>
+        <a href="#carta-do-dia" class="btn btn-ghost btn-lg">Ver carta do dia</a>
+      </div>
+      <ol class="hero-journey" aria-label="Jornada principal">
+        <li><span>1</span> Criar conta</li>
+        <li><span>2</span> Fazer pergunta</li>
+        <li><span>3</span> Receber leitura</li>
+        <li><span>4</span> Escolher oferta</li>
+      </ol>
+      <div class="hero-trust">
+        <div class="trust-item"><span class="trust-num">IA</span><span class="trust-label">Interpretacao personalizada</span></div>
+        <div class="trust-divider"></div>
+        <div class="trust-item"><span class="trust-num">PIX</span><span class="trust-label">Pagamento seguro</span></div>
+        <div class="trust-divider"></div>
+        <div class="trust-item"><span class="trust-num">LGPD</span><span class="trust-label">Historico protegido</span></div>
+      </div>
+    </div>
+    <div class="hero-content hero-content-legacy" hidden aria-hidden="true">
+      <p class="hero-eyebrow">&#10024; Tarot com IA, histórico e créditos reais</p>
+      <h1 class="hero-title" style="font-size: clamp(2rem, 5vw, 3.5rem); line-height: 1.2;">
+        DESCUBRA SUAS<br/>RESPOSTAS<br/>SEM SAIR<br/>DE CASA.<br/>
+        <span class="hero-title-gold">PARE DE TOMAR<br/>DECIS&Otilde;ES<br/>NO ESCURO.</span>
+      </h1>
+      <p class="hero-subtitle" style="font-size: 1.2rem; color: var(--branco);">
+        Suas respostas est&atilde;o nas cartas. Carta do dia gr&aacute;tis em 1 clique e primeira leitura de 3 cartas sem custo.
+      </p>
+      <div class="hero-ctas">
+        <a href="#consulta" class="btn btn-primary btn-lg btn-primary-hero" onclick="authGuard(event,'consulta')">&#128302; Fazer Minha Consulta Gratuita</a>
+        <a href="#carta-do-dia" class="btn btn-ghost btn-lg">&#127769; Ver Carta do Dia</a>
+        <a href="/admin.html" class="btn btn-ghost btn-lg admin-only-link hero-admin-link" id="heroAdminLink" onclick="abrirPainelAdmin(event)" style="display:none">&#9881; Painel Admin</a>
+      </div>
+      <div class="hero-trust">
+        <div class="trust-item"><span class="trust-num">IA</span><span class="trust-label">Interpretação personalizada</span></div>
+        <div class="trust-divider"></div>
+        <div class="trust-item"><span class="trust-num">PIX</span><span class="trust-label">Pagamento seguro</span></div>
+        <div class="trust-divider"></div>
+        <div class="trust-item"><span class="trust-num">CRM</span><span class="trust-label">Histórico protegido</span></div>
+      </div>
+    </div>
+    <div class="hero-madame" aria-hidden="true">
+      <div class="hero-madame-figure">
+        <div class="hero-madame-glow"></div>
+        <div class="hero-madame-body"></div>
+        <div class="hero-madame-orb"></div>
+        <div class="hero-madame-stars">
+          <span class="hero-madame-star" style="left: 10%; top: 20%; --dur: 2s; --delay: 0s;">✦</span>
+          <span class="hero-madame-star" style="left: 80%; top: 30%; --dur: 3s; --delay: 1s;">✦</span>
+          <span class="hero-madame-star" style="left: 20%; top: 70%; --dur: 4s; --delay: 0.5s;">✦</span>
+        </div>
+      </div>
+    </div>
+    <div class="hero-cards" aria-hidden="true">
+      <div class="tarot-card tarot-card-left">
+        <div class="tarot-card-inner">
+          <div class="card-face card-back-face"></div>
+          <div class="card-face card-front-face"><span>&#9790;</span><p>A Lua</p></div>
+        </div>
+      </div>
+      <div class="tarot-card tarot-card-center">
+        <div class="tarot-card-inner">
+          <div class="card-face card-back-face"></div>
+          <div class="card-face card-front-face"><span>&#9728;</span><p>O Sol</p></div>
+        </div>
+      </div>
+      <div class="tarot-card tarot-card-right">
+        <div class="tarot-card-inner">
+          <div class="card-face card-back-face"></div>
+          <div class="card-face card-front-face"><span>&#11088;</span><p>A Estrela</p></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ CARTA DO DIA ══ -->
+  <section class="trusted-strip trusted-topics-strip" aria-label="Temas mais buscados">
+    <div class="trusted-strip-inner">
+      <p>Descubra sobre</p>
+      <div class="hero-proof-slider trusted-topic-slider">
+        <div class="hero-proof-track trusted-topic-track">
+          <span class="proof-logo trusted-topic"><b>&#128176;</b><em>Prosperidade</em></span>
+          <span class="proof-logo trusted-topic"><b>&#127969;</b><em>Familia</em></span>
+          <span class="proof-logo trusted-topic"><b>&#128150;</b><em>Amor</em></span>
+          <span class="proof-logo trusted-topic"><b>&#128188;</b><em>Trabalho</em></span>
+          <span class="proof-logo trusted-topic"><b>&#128302;</b><em>Futuro</em></span>
+          <span class="proof-logo trusted-topic"><b>&#128064;</b><em>Traicoes</em></span>
+          <span class="proof-logo trusted-topic"><b>&#128148;</b><em>Ex amor</em></span>
+          <span class="proof-logo trusted-topic"><b>&#129504;</b><em>Decisoes</em></span>
+          <span class="proof-logo trusted-topic"><b>&#128176;</b><em>Prosperidade</em></span>
+          <span class="proof-logo trusted-topic"><b>&#127969;</b><em>Familia</em></span>
+          <span class="proof-logo trusted-topic"><b>&#128150;</b><em>Amor</em></span>
+          <span class="proof-logo trusted-topic"><b>&#128188;</b><em>Trabalho</em></span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section carta-dia-section" id="carta-do-dia">
+    <div class="container">
+      <p class="section-eyebrow">&#10024; Energia do Momento</p>
+      <h2 class="section-title">CARTA DO DIA</h2>
+      <p class="section-subtitle">Clique na carta para revelar a mensagem que o universo preparou para voc&ecirc; hoje</p>
+      <div class="carta-dia-wrapper">
+        <div class="carta-dia-experience">
+          <div class="carta-dia-card" id="cartaDoDia" onclick="authGuardCarta()">
+            <div class="carta-dia-inner" id="cartaDiaInner">
+              <div class="card-back-daily" id="cardBackDaily">
+                <div class="card-art-frame">
+                  <div class="card-art-moon">&#127769;</div>
+                  <div class="card-art-title">Carta do Dia</div>
+                  <div class="card-art-hint">Toque para revelar</div>
+                </div>
+              </div>
+              <div class="card-reveal" id="cardReveal">
+                <div class="card-art-frame card-art-frame-revealed">
+                  <img class="arcano-card-image daily-arcano-image" id="dailyArcanoImage" alt="Imagem do arcano revelado" />
+                  <div class="card-reveal-symbol" id="cardSymbol">&#9790;</div>
+                  <div class="card-reveal-name" id="cardName">A Lua</div>
+                  <div class="card-reveal-caption">Energia revelada</div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <article class="carta-dia-message-panel" id="cartaMessagePanel" aria-live="polite">
+            <span class="message-panel-eyebrow">Mensagem do universo</span>
+            <h3 id="dailyCardTitle">Revele sua carta</h3>
+            <p id="cardMessage">Clique na carta para abrir a energia do dia e receber uma orientação personalizada para suas escolhas.</p>
+            <div class="message-panel-footer">
+              <span id="dailyCardSymbol">&#9790;</span>
+              <span>Leitura intuitiva do dia</span>
+            </div>
+          </article>
+        </div>
+        <div class="carta-dia-cta" id="cartaCta" style="display:none">
+          <p>Quer uma leitura completa de 3 cartas?</p>
+          <a href="#consulta" class="btn btn-primary btn-lg" onclick="authGuard(event,'consulta')">&#128302; Fazer Consulta Personalizada</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ SEPARADOR ══ -->
+  <div class="container">
+    <div class="section-divider"><span class="section-divider-symbol">✦ ☽ ✦</span></div>
+  </div>
+
+  <!-- ══ CONSULTA ══ -->
+  <section class="section consulta-section" id="consulta">
+    <div class="container">
+      <p class="section-eyebrow">&#128302; Leitura Personalizada</p>
+      <h2 class="section-title">O QUE VOC&Ecirc; TEM<br/><span class="gold">MEDO DE PERGUNTAR?</span></h2>
+      <p class="section-subtitle">Amor. Carreira. Fam&iacute;lia. Prop&oacute;sito. As cartas respondem com honestidade.</p>
+
+      <!-- Gate: aparece quando não está logado -->
+      <div class="auth-gate" id="consultaGate">
+        <div class="auth-gate-inner glass-card">
+          <div class="auth-gate-icon">&#128274;</div>
+          <h3 class="auth-gate-title">Crie sua conta para continuar</h3>
+          <p class="auth-gate-desc">A consulta &eacute; gratuita. Basta criar uma conta para acessar as cartas.</p>
+          <div class="auth-gate-btns">
+            <button class="btn btn-primary btn-lg" onclick="abrirAuth('cadastro')">&#10024; Criar Conta Gr&aacute;tis</button>
+            <button class="btn btn-ghost" onclick="abrirAuth('login')">J&aacute; tenho conta</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Área de consulta: aparece quando logado -->
+      <div id="consultaArea" style="display:none">
+        <div class="consulta-box" id="consultaBox">
+          <div class="chat-input" id="chatInput">
+            <textarea id="perguntaInput" class="chat-input-textarea" placeholder="Escreva sua pergunta para as cartas..." rows="1" maxlength="300" aria-describedby="charCount consultaHint"></textarea>
+            <div class="chat-input-footer">
+              <span class="char-count" id="charCount">0/300</span>
+              <button class="chat-submit" id="btnConsultar" onclick="iniciarConsulta()" aria-label="Revelar minhas cartas" disabled>
+                <span class="chat-submit-arrow">&#8593;</span>
+                <span class="chat-submit-stop" aria-hidden="true"></span>
+              </button>
+            </div>
+          </div>
+          <!-- Chips de Sugestão -->
+          <div class="chips-sugestao" id="chipsSugestao">
+            <button class="chip" onclick="usarChip(this)">&#128149; Meu relacionamento</button>
+            <button class="chip" onclick="usarChip(this)">&#128188; Minha carreira</button>
+            <button class="chip" onclick="usarChip(this)">&#127775; Meu próximo passo</button>
+            <button class="chip" onclick="usarChip(this)">&#128176; Prosperidade</button>
+            <button class="chip" onclick="usarChip(this)">&#127774; Propósito de vida</button>
+          </div>
+          <p class="consulta-disclaimer" id="consultaHint">&#10003; Sua pergunta é confidencial &nbsp;|&nbsp; &#10003; Enter envia, Shift+Enter quebra linha</p>
+        </div>
+        <div class="consulta-resultado" id="consultaResultado" style="display:none">
+          <div class="resultado-loading" id="resultadoLoading" role="status" aria-live="polite">
+            <div class="loading-shuffle">
+              <div class="loading-card-sh lcs-1"></div>
+              <div class="loading-card-sh lcs-2"></div>
+              <div class="loading-card-sh lcs-3"></div>
+            </div>
+            <div class="loading-messages">
+              <p class="loading-text" id="loadingMessage">A Madame do Luar est&aacute; consultando as estrelas...</p>
+              <div class="loading-steps">
+                <span class="loading-dot" id="ldot-1"></span>
+                <span class="loading-dot" id="ldot-2"></span>
+                <span class="loading-dot" id="ldot-3"></span>
+              </div>
+            </div>
+          </div>
+          <div class="resultado-api-error glass-card" id="resultadoApiError" style="display:none" role="alert">
+            <h3>Não foi possível concluir a leitura agora</h3>
+            <p id="resultadoApiErrorText">A conexão com a API falhou. Nenhum resultado simbólico foi inventado no lugar da leitura real.</p>
+            <div class="resultado-actions">
+              <button class="btn btn-primary" onclick="novaConsulta()">Tentar novamente</button>
+              <button class="btn btn-ghost" onclick="abrirPerfil()">Ver minha conta</button>
+            </div>
+          </div>
+          <div class="resultado-cartas" id="resultadoCartas" style="display:none">
+            <div class="tres-cartas">
+              <div class="carta-resultado">
+                <div class="carta-posicao">Passado</div>
+                <div class="carta-resultado-card">
+                  <img class="arcano-card-image resultado-card-image" id="passadoImage" alt="Imagem do arcano do passado" loading="lazy" decoding="async" />
+                  <div class="carta-resultado-symbol" id="passadoSymbol">&#9790;</div>
+                  <div class="carta-resultado-nome" id="passadoNome">...</div>
+                  <div class="carta-resultado-tag" id="passadoTag">Normal</div>
+                </div>
+              </div>
+              <div class="carta-resultado carta-resultado-center">
+                <div class="carta-posicao">Presente</div>
+                <div class="carta-resultado-card carta-resultado-card-main">
+                  <img class="arcano-card-image resultado-card-image" id="presenteImage" alt="Imagem do arcano do presente" loading="lazy" decoding="async" />
+                  <div class="carta-resultado-symbol" id="presenteSymbol">&#9728;</div>
+                  <div class="carta-resultado-nome" id="presenteNome">...</div>
+                  <div class="carta-resultado-tag" id="presenteTag">Normal</div>
+                </div>
+              </div>
+              <div class="carta-resultado">
+                <div class="carta-posicao">Futuro</div>
+                <div class="carta-resultado-card">
+                  <img class="arcano-card-image resultado-card-image" id="futuroImage" alt="Imagem do arcano do futuro" loading="lazy" decoding="async" />
+                  <div class="carta-resultado-symbol" id="futuroSymbol">&#11088;</div>
+                  <div class="carta-resultado-nome" id="futuroNome">...</div>
+                  <div class="carta-resultado-tag" id="futuroTag">Normal</div>
+                </div>
+              </div>
+            </div>
+            <div class="resultado-interpretacao" id="resultadoTexto"></div>
+            <div class="resultado-actions">
+              <p>Gostou da sua leitura? Aprofunde sua jornada:</p>
+              <a href="#planos" class="btn btn-primary btn-lg">&#127769; Garantir Meu Acesso Completo</a>
+              <button class="btn btn-ghost" onclick="novaConsulta()">Fazer nova pergunta</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ SEPARADOR ══ -->
+  <div class="container">
+    <div class="section-divider"><span class="section-divider-symbol">✦ ☽ ✦</span></div>
+  </div>
+
+  <!-- ══ COMO FUNCIONA ══ -->
+  <section class="section como-funciona-section">
+    <div class="container">
+      <p class="section-eyebrow reveal">&#10024; Sua Jornada Mística</p>
+      <h2 class="section-title reveal reveal-delay-1">COMO FUNCIONA</h2>
+      
+      <div class="timeline-container reveal reveal-delay-2">
+        <div class="timeline-line"></div>
+        <div class="timeline-step">
+          <div class="timeline-dot"></div>
+          <div class="timeline-content glass-card">
+            <div class="step-number">01</div>
+            <h3 class="step-title">Conecte-se</h3>
+            <p class="step-desc">Concentre-se e faça sua pergunta para as cartas, com o coração e a mente abertos.</p>
+          </div>
+        </div>
+        <div class="timeline-step">
+          <div class="timeline-dot"></div>
+          <div class="timeline-content glass-card">
+            <div class="step-number">02</div>
+            <h3 class="step-title">As Cartas Falam</h3>
+            <p class="step-desc">A Madame tira três cartas revelando as energias do seu passado, presente e futuro.</p>
+          </div>
+        </div>
+        <div class="timeline-step">
+          <div class="timeline-dot"></div>
+          <div class="timeline-content glass-card">
+            <div class="step-number">03</div>
+            <h3 class="step-title">Orientação e Ritual</h3>
+            <p class="step-desc">Receba uma interpretação profunda e um conselho prático para o seu momento atual.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ SEPARADOR ══ -->
+  <div class="container">
+    <div class="section-divider"><span class="section-divider-symbol">✦ ☽ ✦</span></div>
+  </div>
+
+  <!-- ══ DEPOIMENTOS ══ -->
+  <section class="section depoimentos-section">
+    <div class="container">
+      <p class="section-eyebrow reveal">&#128171; Hist&oacute;rias Reais</p>
+      <h2 class="section-title reveal reveal-delay-1">VIDAS TRANSFORMADAS</h2>
+      <div class="depoimentos-grid">
+        <div class="depoimento-card glass-card">
+          <div class="depoimento-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+          <p class="depoimento-texto">"Eu estava perdida no meu casamento. A leitura me deu clareza que meses de terapia n&atilde;o conseguiram."</p>
+          <div class="depoimento-autor">
+            <div class="depoimento-avatar">M</div>
+            <div><div class="depoimento-nome">Mariana S.</div><div class="depoimento-local">S&atilde;o Paulo, SP</div></div>
+          </div>
+        </div>
+        <div class="depoimento-card glass-card depoimento-destaque">
+          <div class="depoimento-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+          <p class="depoimento-texto">"Fiz a consulta na d&uacute;vida entre dois empregos. A Madame revelou energias que eu nem tinha percebido. Escolhi certo!"</p>
+          <div class="depoimento-autor">
+            <div class="depoimento-avatar">R</div>
+            <div><div class="depoimento-nome">Rafael M.</div><div class="depoimento-local">Curitiba, PR</div></div>
+          </div>
+        </div>
+        <div class="depoimento-card glass-card">
+          <div class="depoimento-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+          <p class="depoimento-texto">"Assino h&aacute; 3 meses. A carta do dia virou meu ritual matinal. Incr&iacute;vel como ela sempre ressoa com o que estou vivendo!"</p>
+          <div class="depoimento-autor">
+            <div class="depoimento-avatar">C</div>
+            <div><div class="depoimento-nome">Carla F.</div><div class="depoimento-local">Rio de Janeiro, RJ</div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ PLANOS ══ -->
+  <section class="section rituais-section post-reading-only" id="rituais">
+    <div class="container">
+      <p class="section-eyebrow reveal">&#10024; Biblioteca guiada</p>
+      <h2 class="section-title reveal reveal-delay-1">RITUAIS DO LUAR</h2>
+      <p class="section-subtitle reveal reveal-delay-2">Pr&aacute;ticas gratuitas e rituais completos em PDF ou &aacute;udio para transformar a leitura em a&ccedil;&atilde;o.</p>
+      <div class="ritual-toolbar reveal reveal-delay-3">
+        <button class="ritual-filter active" data-ritual-filter="todos" onclick="filtrarRituais('todos')">Todos</button>
+        <button class="ritual-filter" data-ritual-filter="gratuito" onclick="filtrarRituais('gratuito')">Gratuitos</button>
+        <button class="ritual-filter" data-ritual-filter="pago" onclick="filtrarRituais('pago')">Pagos</button>
+      </div>
+      <div class="ritual-grid" id="ritualGrid">
+        <div class="ritual-empty glass-card">Carregando rituais...</div>
+      </div>
+    </div>
+  </section>
+
+  <div class="container">
+    <div class="section-divider"><span class="section-divider-symbol">&#10022; &#9790; &#10022;</span></div>
+  </div>
+
+  <section class="section planos-section" id="planos-old" hidden>
+    <div class="container">
+      <p class="section-eyebrow">&#127769; Escolha sua jornada</p>
+      <h2 class="section-title">ACESSO AO PORTAL</h2>
+      
+      <div style="max-width: 860px; margin: 0 auto 48px; text-align: left; color: var(--cinza-claro); font-size: 1.05rem; line-height: 1.8; background: var(--glass-bg); padding: 32px; border-radius: var(--radius-md); border: 1px solid var(--glass-border);">
+        <p style="margin-bottom: 24px;"><strong><span style="color: var(--dourado);">O Valor de uma Orienta&ccedil;&atilde;o Verdadeira:</span></strong> Uma consulta de tar&ocirc; costuma custar entre R$80 e R$150 e dura apenas alguns minutos. Com o Madame do Luar voc&ecirc; recebe 1.500 creditos por mes, carta do dia, rituais exclusivos e acompanhamento recorrente por R$49,90. <em>Isso equivale a 30 tiragens de 3 cartas por ciclo mensal.</em></p>
+        <p><strong><span style="color: var(--dourado);">Vantagem Anual:</span></strong> O plano mensal sai por R$49,90. Se voc&ecirc; escolher o anual, recebe 18.250 creditos por <strong>R$397,00</strong>, garantindo 365 tiragens de 3 cartas no ciclo anual e economia sobre o pagamento mensal recorrente.</p>
+      </div>
+
+      <div class="pricing-shell">
+        <div class="pricing-card" id="pricingCard">
+          <div class="pricing-head">
+            <h3>Escolha seu plano</h3>
+            <p>Comece gr&aacute;tis ou libere acompanhamento completo.</p>
+          </div>
+
+          <div class="billing-toggle" aria-label="Ciclo de cobran&ccedil;a">
+            <button class="billing-option active" id="billingMonthly" onclick="setBillingCycle('monthly')">Mensal</button>
+            <button class="billing-option" id="billingYearly" onclick="setBillingCycle('yearly')">
+              Anual <span>34% OFF</span>
+            </button>
+          </div>
+
+          <div class="pricing-options">
+            <button class="pricing-option" data-plan="gratuito" onclick="selectPricingPlan('gratuito')">
+              <span class="pricing-radio"></span>
+              <span class="pricing-copy">
+                <strong>Gratuito</strong>
+                <small>primeira experi&ecirc;ncia</small>
+              </span>
+              <span class="pricing-price">
+                <strong>R$0</strong>
+                <small>para sempre</small>
+              </span>
+              <span class="pricing-details">
+                <span>&#10003; 1 leitura de 3 cartas</span>
+                <span>&#10003; Carta do dia limitada</span>
+                <span>&#10003; Interpreta&ccedil;&atilde;o b&aacute;sica</span>
+              </span>
+            </button>
+
+            <button class="pricing-option active" data-plan="premium" onclick="selectPricingPlan('premium')">
+              <span class="pricing-radio"></span>
+              <span class="pricing-copy">
+                <strong>Portal Premium</strong>
+                <small id="premiumDescription">acompanhamento mensal</small>
+              </span>
+              <span class="pricing-price">
+                <strong id="premiumPrice">R$49,90</strong>
+                <small id="premiumPeriod">por m&ecirc;s</small>
+              </span>
+              <span class="pricing-details">
+                <span>&#10003; 1.500 creditos mensais</span>
+                <span>&#10003; Carta do dia exclusiva</span>
+                <span>&#10003; Rituais em PDF e &aacute;udio</span>
+                <span>&#10003; Mensagens de acompanhamento</span>
+              </span>
+            </button>
+
+            <button class="pricing-option" data-plan="leitura" onclick="selectPricingPlan('leitura')">
+              <span class="pricing-radio"></span>
+              <span class="pricing-copy">
+                <strong>Leitura Avulsa</strong>
+                <small>sem assinatura</small>
+              </span>
+              <span class="pricing-price">
+                <strong>R$19,90</strong>
+                <small>pagamento &uacute;nico</small>
+              </span>
+              <span class="pricing-details">
+                <span>&#10003; Uma leitura de 3 cartas</span>
+                <span>&#10003; Interpreta&ccedil;&atilde;o personalizada</span>
+                <span>&#10003; Registro no seu hist&oacute;rico</span>
+              </span>
+            </button>
+          </div>
+
+          <div class="pricing-footer">
+            <button class="btn btn-primary btn-full btn-lg" id="pricingCta" onclick="comprarPlanoSelecionado()">Garantir acesso premium</button>
+            <p id="pricingHint">Cobran&ccedil;a segura. Cancele quando quiser.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ FOOTER ══ -->
+  <section class="pricing2-section" id="planos">
+    <canvas class="pricing2-particles" id="pricingParticles"></canvas>
+    <div class="pricing2-vignette"></div>
+    <div class="pricing2-lines" aria-hidden="true">
+      <span class="hline"></span>
+      <span class="hline"></span>
+      <span class="hline"></span>
+      <span class="vline"></span>
+      <span class="vline"></span>
+      <span class="vline"></span>
+    </div>
+
+    <div class="container pricing2-content">
+      <div class="pricing2-heading">
+        <p class="section-eyebrow">&#127769; Oferta principal</p>
+        <h2>Portal Premium Mensal</h2>
+        <p>Uma assinatura simples para consultar as cartas com recorrencia. Leitura avulsa e recargas continuam disponiveis como alternativas secundarias.</p>
+        
+        <div class="pricing-note">
+          <span class="countdown-label">Acesso liberado conforme confirmação do pagamento</span>
+          <p>Escolha o plano certo para o seu momento e acompanhe pagamentos, leituras e créditos pelo seu perfil.</p>
+        </div>
+      </div>
+
+      <div class="pricing2-switch" aria-label="Alternar cobranca">
+        <span>Mensal</span>
+        <button class="pricing-switch" id="billingSwitch" type="button" onclick="toggleBillingCycle()" aria-pressed="false">
+          <span></span>
+        </button>
+        <span>Anual</span>
+      </div>
+
+      <div class="pricing2-grid pricing2-grid-focused">
+        <article class="pricing2-card pricing2-card-featured pricing2-card-primary card-animate">
+          <header class="pricing2-card-header">
+            <span class="pricing2-badge">Recomendado</span>
+            <h3>Portal Premium</h3>
+            <p>Acompanhamento continuo para transformar duvidas recorrentes em proximos passos.</p>
+            <strong class="pricing2-price" id="growthPrice">R$49,90</strong>
+            <span class="pricing2-billing" id="growthBilling">por mes</span>
+          </header>
+          <div class="pricing2-separator"></div>
+          <ul class="pricing2-features">
+            <li><span>&#10003;</span> 1.500 creditos por mes</li>
+            <li><span>&#10003;</span> Ate 30 leituras de 3 cartas</li>
+            <li><span>&#10003;</span> Carta do dia e historico protegido</li>
+            <li><span>&#10003;</span> Rituais recomendados depois da leitura</li>
+          </ul>
+          <button class="pricing2-button" onclick="comprarPricingCard('premium')">
+            Assinar mensal <span>&#8594;</span>
+          </button>
+        </article>
+
+        <article class="pricing2-card pricing2-card-secondary card-animate">
+          <header class="pricing2-card-header">
+            <h3>Leitura Avulsa</h3>
+            <p>Para uma resposta pontual, sem recorrencia.</p>
+            <strong class="pricing2-price" id="starterPrice">R$19,90</strong>
+            <span class="pricing2-billing" id="starterBilling">Pagamento unico</span>
+          </header>
+          <div class="pricing2-separator"></div>
+          <ul class="pricing2-features">
+            <li><span>&#10003;</span> 100 creditos</li>
+            <li><span>&#10003;</span> 2 leituras de 3 cartas</li>
+            <li><span>&#10003;</span> Interpretacao personalizada</li>
+            <li><span>&#10003;</span> Registro no historico</li>
+          </ul>
+          <button class="pricing2-button pricing2-button-secondary" onclick="comprarPricingCard('leitura')">
+            Comprar avulsa <span>&#8594;</span>
+          </button>
+        </article>
+      </div>
+
+      <button class="secondary-offers-toggle" type="button" onclick="toggleCreditPackages()" aria-controls="creditos" aria-expanded="false">
+        Ver recargas avulsas de creditos
+      </button>
+
+      <section class="credits-purchase-panel secondary-offers-panel" id="creditos" aria-labelledby="creditosTitle" hidden>
+        <div class="credits-panel-head">
+          <div>
+            <p class="section-eyebrow">&#9671; Recarga avulsa</p>
+            <h3 id="creditosTitle">Comprar cr&eacute;ditos individuais</h3>
+            <p>Escolha um pacote sem assinatura. Os cr&eacute;ditos s&atilde;o liberados ap&oacute;s a confirma&ccedil;&atilde;o do pagamento.</p>
+          </div>
+          <button class="credits-doc-link" type="button" onclick="abrirPerfil('creditos')">
+            Ver saldo <span>&#8599;</span>
+          </button>
+        </div>
+
+        <div class="credits-summary-grid">
+          <article class="credits-status-card">
+            <div class="credits-orb" aria-hidden="true"></div>
+            <div>
+              <strong>Cr&eacute;ditos para leituras</strong>
+              <span>Use em tiragens, rituais pagos e experi&ecirc;ncias premium.</span>
+            </div>
+            <ul>
+              <li><span>&#10003;</span> Compra avulsa, sem mensalidade</li>
+              <li><span>&#10003;</span> Pagamento seguro via Mercado Pago</li>
+              <li><span>&#10003;</span> Saldo acompanhado no perfil</li>
+            </ul>
+          </article>
+
+          <article class="credits-meter-card">
+            <div class="credits-meter-top">
+              <span>Pacote selecionado</span>
+              <strong id="creditPackageCredits">100</strong>
+            </div>
+            <div class="credits-meter-bar" aria-hidden="true">
+              <span id="creditPackageBar"></span>
+            </div>
+            <div class="credits-meter-lines">
+              <p><strong id="creditPackageName">100 cr&eacute;ditos</strong><span id="creditPackagePrice">R$19,90</span></p>
+              <p><small id="creditPackageUse">Equivale a 2 tiragens de 3 cartas</small></p>
+            </div>
+          </article>
+        </div>
+
+        <div class="credits-package-grid" role="radiogroup" aria-label="Pacotes de creditos">
+          <button class="credit-package-card active" type="button" data-package="recarga_100" onclick="selecionarPacoteCredito('recarga_100')" aria-checked="true" role="radio">
+            <span class="credit-package-check">&#10003;</span>
+            <strong>100 cr&eacute;ditos</strong>
+            <small>2 tiragens de 3 cartas</small>
+            <em>R$19,90</em>
+          </button>
+          <button class="credit-package-card" type="button" data-package="recarga_300" onclick="selecionarPacoteCredito('recarga_300')" aria-checked="false" role="radio">
+            <span class="credit-package-check">&#10003;</span>
+            <strong>300 cr&eacute;ditos</strong>
+            <small>6 tiragens de 3 cartas</small>
+            <em>R$49,90</em>
+          </button>
+          <button class="credit-package-card" type="button" data-package="recarga_500" onclick="selecionarPacoteCredito('recarga_500')" aria-checked="false" role="radio">
+            <span class="credit-package-check">&#10003;</span>
+            <strong>500 cr&eacute;ditos</strong>
+            <small>10 tiragens de 3 cartas</small>
+            <em>R$79,90</em>
+          </button>
+          <button class="credit-package-card" type="button" data-package="recarga_1500" onclick="selecionarPacoteCredito('recarga_1500')" aria-checked="false" role="radio">
+            <span class="credit-package-check">&#10003;</span>
+            <strong>1.500 cr&eacute;ditos</strong>
+            <small>30 tiragens de 3 cartas</small>
+            <em>R$199,90</em>
+          </button>
+        </div>
+
+        <div class="credits-buy-box">
+          <button class="credits-buy-button" type="button" onclick="comprarPacoteCreditoSelecionado()">
+            Comprar pacote selecionado
+          </button>
+          <label class="credits-select-label" for="creditPackageSelect">Escolher quantidade</label>
+          <select class="credits-package-select" id="creditPackageSelect" onchange="selecionarPacoteCredito(this.value)">
+            <option value="recarga_100">100 cr&eacute;ditos</option>
+            <option value="recarga_300">300 cr&eacute;ditos</option>
+            <option value="recarga_500">500 cr&eacute;ditos</option>
+            <option value="recarga_1500">1.500 cr&eacute;ditos</option>
+          </select>
+        </div>
+      </section>
+    </div>
+  </section>
+
+  <footer class="footer footer-premium">
+    <div class="footer-premium-glow" aria-hidden="true"></div>
+    <div class="footer-premium-inner">
+      <div class="footer-brand-panel footer-reveal" style="--footer-delay: 0s;">
+        <a class="footer-brand" href="#hero" aria-label="Voltar ao inicio">
+          <span class="footer-brand-mark">&#9790;</span>
+          <span class="footer-brand-name">Madame do Luar</span>
+        </a>
+        <p class="footer-brand-copy">Tarot ancestral, IA segura e rituais digitais para orientar decisoes com mais clareza.</p>
+        <p class="footer-rights">&#169; 2026 Madame do Luar. Todos os direitos reservados.</p>
+      </div>
+
+      <nav class="footer-nav-grid" aria-label="Links do rodape">
+        <section class="footer-column footer-reveal" style="--footer-delay: 0.08s;">
+          <h3>Produto</h3>
+          <ul>
+            <li><a href="#consulta">Consulta gratuita</a></li>
+            <li><a href="#carta-do-dia">Carta do dia</a></li>
+            <li><a href="#planos">Planos</a></li>
+            <li><a href="#rituais">Rituais</a></li>
+          </ul>
+        </section>
+
+        <section class="footer-column footer-reveal" style="--footer-delay: 0.16s;">
+          <h3>Empresa</h3>
+          <ul>
+            <li><a href="/termos.html">Termos de uso</a></li>
+            <li><a href="/privacidade.html">Privacidade</a></li>
+            <li><a href="/ia.html">Uso de IA</a></li>
+            <li><a href="#" onclick="abrirAuth('login'); return false;">Entrar</a></li>
+          </ul>
+        </section>
+
+        <section class="footer-column footer-reveal" style="--footer-delay: 0.24s;">
+          <h3>Recursos</h3>
+          <ul>
+            <li><a href="#planos">Ofertas</a></li>
+            <li><a href="/privacidade.html">LGPD e privacidade</a></li>
+            <li><a href="/admin.html" class="admin-only-link" style="display:none" onclick="abrirPainelAdmin(event)">Painel admin</a></li>
+            <li><a href="#hero">Voltar ao topo</a></li>
+          </ul>
+        </section>
+
+        <section class="footer-column footer-reveal" style="--footer-delay: 0.32s;">
+          <h3>Social</h3>
+          <ul>
+            <li><a href="#" aria-label="Instagram Madame do Luar"><span class="footer-social-icon">&#9673;</span> Instagram</a></li>
+            <li><a href="#" aria-label="Facebook Madame do Luar"><span class="footer-social-icon">f</span> Facebook</a></li>
+            <li><a href="#" aria-label="YouTube Madame do Luar"><span class="footer-social-icon">&#9654;</span> YouTube</a></li>
+            <li><a href="#" aria-label="WhatsApp Madame do Luar"><span class="footer-social-icon">&#9742;</span> WhatsApp</a></li>
+          </ul>
+        </section>
+      </nav>
+    </div>
+
+    <div class="footer-legal-note">
+      As leituras sao simbolicas e nao substituem orientacao medica, juridica ou financeira.
+    </div>
+  </footer>
+
+  <!-- ══════════════════════════════════
+       MODAL DE AUTH (Cadastro / Login)
+  ══════════════════════════════════ -->
+  <div class="modal-overlay" id="authOverlay" style="display:none" onclick="fecharAuthModal(event)">
+    <div class="modal auth-modal" id="authModal">
+      
+      <!-- Split esquerdo: troque a imagem abaixo ou substitua por um video. -->
+      <div class="auth-modal-left">
+        <div class="auth-media-frame">
+          <img
+            class="auth-media-image"
+            src="/assets/optimized/auth-bg.webp"
+            alt="Madame do Luar fazendo leitura de tarot"
+            loading="lazy"
+            decoding="async"
+          />
+        </div>
+        <div class="auth-modal-left-overlay"></div>
+        <div class="auth-modal-left-content">
+          <div class="auth-brand-mark">Madame do Luar</div>
+          <h2>Explore. Sinta. Revele.</h2>
+          <p>Entre em um ritual digital premium com leituras, mensagens intuitivas e orienta&ccedil;&atilde;o espiritual guiada por IA.</p>
+        </div>
+      </div>
+
+      <!-- Split Direito (Formulário) -->
+      <div class="auth-modal-right">
+        <button class="modal-close" onclick="fecharAuthModal()">&#10005;</button>
+
+        <!-- Tabs -->
+        <div class="auth-tabs">
+          <button class="auth-tab active" id="tabLogin" onclick="mudarTab('login')">Entrar</button>
+          <button class="auth-tab" id="tabCadastro" onclick="mudarTab('cadastro')">Criar Conta</button>
+        </div>
+
+        <!-- CADASTRO -->
+        <div id="formCadastro" style="display:none">
+          <h3 class="modal-title">Sua jornada come&ccedil;a aqui</h3>
+          <p class="modal-subtitle">Crie sua conta gratuita e acesse as cartas</p>
+          <form class="modal-form" id="formCadastroEl" onsubmit="submeterCadastro(event)" novalidate>
+            <div class="input-group">
+              <input type="text" class="modal-input floating-input" id="cadNome" placeholder=" " required minlength="2" />
+              <label class="floating-label">Nome Completo</label>
+            </div>
+            <div class="input-group">
+              <input type="email" class="modal-input floating-input" id="cadEmail" placeholder=" " required />
+              <label class="floating-label">E-mail</label>
+            </div>
+            <div class="input-group">
+              <div class="input-senha-wrapper">
+                <input type="password" class="modal-input floating-input" id="cadSenha" placeholder=" " required minlength="6" />
+                <label class="floating-label">Senha (M&iacute;n. 6 caracteres)</label>
+                <button type="button" class="toggle-senha" onclick="toggleSenha('cadSenha')">&#128065;</button>
+              </div>
+            </div>
+            <div class="input-group">
+              <input type="tel" class="modal-input floating-input" id="cadWhatsapp" placeholder=" " />
+              <label class="floating-label">WhatsApp (Opcional)</label>
+            </div>
+            <label class="modal-terms" style="display:flex; gap:10px; align-items:flex-start; text-align:left;">
+              <input type="checkbox" id="cadWhatsappOptIn" style="margin-top:3px;" />
+              Aceito receber mensagens transacionais e lembretes pelo WhatsApp.
+            </label>
+            <label class="modal-terms" style="display:flex; gap:10px; align-items:flex-start; text-align:left;">
+              <input type="checkbox" id="cadEmailOptIn" style="margin-top:3px;" />
+              Aceito receber emails transacionais, lembretes e campanhas.
+            </label>
+            <label class="modal-terms" style="display:flex; gap:10px; align-items:flex-start; text-align:left;">
+              <input type="checkbox" id="cadLegalAccept" style="margin-top:3px;" required />
+              Li e aceito os <a href="/termos.html" target="_blank" rel="noopener">Termos</a>, a <a href="/privacidade.html" target="_blank" rel="noopener">Privacidade</a> e o <a href="/ia.html" target="_blank" rel="noopener">aviso de IA</a>.
+            </label>
+            <div class="form-error" id="erroCadastro" style="display:none" aria-live="polite"></div>
+            <button type="submit" class="btn btn-primary btn-full btn-lg btn-ripple" id="btnCadastrar">
+              &#10024; Criar Minha Conta Gr&aacute;tis
+            </button>
+          </form>
+          <p class="modal-terms">Ao continuar voc&ecirc; concorda com nossos <a href="/termos.html">Termos de Uso</a></p>
+          <p class="auth-switch-copy">J&aacute; tem uma conta? <button type="button" onclick="mudarTab('login')">Entrar</button></p>
+        </div>
+
+        <!-- LOGIN -->
+        <div id="formLogin">
+          <h3 class="modal-title">Bem-vinda de volta</h3>
+          <p class="modal-subtitle">As estrelas sentiram sua falta</p>
+          <form class="modal-form" id="formLoginEl" onsubmit="submeterLogin(event)" novalidate>
+            <div class="input-group">
+              <input type="email" class="modal-input floating-input" id="loginEmail" placeholder=" " required />
+              <label class="floating-label">E-mail</label>
+            </div>
+            <div class="input-group">
+              <div class="input-senha-wrapper">
+                <input type="password" class="modal-input floating-input" id="loginSenha" placeholder=" " required />
+                <label class="floating-label">Senha</label>
+                <button type="button" class="toggle-senha" onclick="toggleSenha('loginSenha')">&#128065;</button>
+              </div>
+            </div>
+            <div class="form-error" id="erroLogin" style="display:none" aria-live="polite"></div>
+            <button type="submit" class="btn btn-primary btn-full btn-lg btn-ripple" id="btnLogin">
+              &#128302; Entrar no Portal
+            </button>
+          </form>
+          <p class="auth-switch-copy">Ainda n&atilde;o tem conta? <button type="button" onclick="mudarTab('cadastro')">Criar Conta</button></p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════
+       MODAL DE PAGAMENTO (Escolha Pix/Cartão)
+  ══════════════════════════════════ -->
+  <div class="modal-overlay" id="perfilOverlay" style="display:none" onclick="fecharPerfilModal(event)">
+    <div class="modal perfil-modal" id="perfilModal">
+      <button class="modal-close" onclick="fecharPerfilModal()">&#10005;</button>
+      <div class="perfil-shell">
+        <aside class="perfil-sidebar">
+          <div class="perfil-brand-pill">&#127769; Madame do Luar</div>
+          <div class="perfil-user-card">
+            <div class="perfil-avatar-wrap">
+              <div class="avatar-shell perfil-avatar" id="perfilAvatar">
+                <img id="perfilAvatarImg" class="avatar-image" src="" alt="" hidden />
+                <span class="avatar-fallback" id="perfilAvatarFallback">M</span>
+              </div>
+              <span class="avatar-status perfil-avatar-status"><span class="sr-only">Online</span></span>
+            </div>
+            <h3 class="perfil-title" id="perfilNomeTitulo">Minha conta</h3>
+            <p class="perfil-email" id="perfilEmail">carregando...</p>
+          </div>
+          <nav class="perfil-nav" aria-label="Navegacao da conta">
+            <button class="perfil-nav-item active" type="button" data-perfil-view="dashboard"><span>&#9728;</span> Dashboard</button>
+            <button class="perfil-nav-item" type="button" data-perfil-view="historico"><span>&#128214;</span> Historico</button>
+            <button class="perfil-nav-item" type="button" data-perfil-view="creditos"><span>&#9671;</span> Creditos</button>
+            <button class="perfil-nav-item" type="button" data-perfil-view="configuracoes"><span>&#9881;</span> Configuracoes</button>
+          </nav>
+          <div class="perfil-plan-card">
+            <span class="perfil-label">Plano atual</span>
+            <strong id="perfilPlano">Gratuito</strong>
+            <p>Status: <span id="perfilStatusAssinatura">sem assinatura</span></p>
+            <p>Renovacao: <span id="perfilRenovacao">--</span></p>
+            <label class="perfil-cancel-reason" for="cancelReason" id="cancelReasonLabel" style="display:none;">
+              <span>Motivo do cancelamento</span>
+              <select id="cancelReason">
+                <option value="">Selecione um motivo</option>
+                <option value="preco">Preco</option>
+                <option value="pouco_uso">Pouco uso</option>
+                <option value="nao_entendi_valor">Nao entendi o valor</option>
+                <option value="problema_tecnico">Problema tecnico</option>
+                <option value="pausa_temporaria">Pausa temporaria</option>
+                <option value="outro">Outro</option>
+              </select>
+            </label>
+            <button class="btn btn-outline btn-full" id="btnCancelarAssinatura" type="button" onclick="cancelarAssinatura()" style="display:none;">
+              Cancelar assinatura
+            </button>
+          </div>
+        </aside>
+
+        <main class="perfil-main">
+          <section class="perfil-view active" id="perfilViewDashboard">
+          <section class="perfil-hero">
+            <div class="perfil-hero-stars" aria-hidden="true"></div>
+            <div>
+              <p class="perfil-kicker">Mensagem intuitiva do dia</p>
+              <h3>A lua crescente favorece decisoes emocionais hoje.</h3>
+              <p>Reserve alguns minutos para observar o que se repete nas suas perguntas. A resposta mais importante pode estar no padrao, nao no evento.</p>
+            </div>
+            <div class="perfil-hero-panel">
+              <span>Energia lunar</span>
+              <strong>Azul nevoa</strong>
+              <a class="btn btn-primary btn-sm" href="#consulta" onclick="fecharPerfilModal()">Iniciar leitura</a>
+            </div>
+          </section>
+
+          <div class="perfil-metricas">
+            <div><span>Leituras</span><strong id="perfilMetricLeituras">0</strong><small>Total registrado</small></div>
+            <div><span>Cartas do dia</span><strong id="perfilMetricCartas">0</strong><small>Ritual diario</small></div>
+            <div><span>Mensagens</span><strong id="perfilMetricMensagens">0</strong><small>Insights recebidos</small></div>
+          </div>
+
+          <div class="perfil-dashboard-grid">
+            <section class="perfil-widget perfil-energy-widget">
+              <div class="perfil-widget-head">
+                <span>Energia atual</span>
+                <strong>A Lua</strong>
+              </div>
+              <div class="perfil-card-orbit" aria-hidden="true">&#9790;</div>
+              <p>Intuicao, memoria emocional e escolhas que pedem mais silencio antes da acao.</p>
+              <button class="perfil-action" type="button" onclick="document.getElementById('carta-do-dia').scrollIntoView({behavior:'smooth'}); fecharPerfilModal();">Aprofundar energia</button>
+            </section>
+
+            <section class="perfil-widget perfil-progress-widget">
+              <div class="perfil-widget-head">
+                <span>Jornada espiritual</span>
+                <strong id="perfilProgressValue">0%</strong>
+              </div>
+              <p class="perfil-level" id="perfilNivelEspiritual">Iniciante Lunar</p>
+              <div class="perfil-progress-ring" aria-hidden="true">
+                <span id="perfilProgressRing">0</span>
+              </div>
+              <p>Seu progresso cresce conforme voce usa carta do dia, leituras e mensagens registradas.</p>
+            </section>
+
+            <section class="perfil-widget perfil-ritual-widget">
+              <div class="perfil-widget-head">
+                <span>Ritual diario</span>
+                <strong id="perfilStreak">0 dias</strong>
+              </div>
+              <p class="perfil-ritual-message">Volte diariamente para revelar uma carta, registrar seu momento e alimentar sua jornada intuitiva.</p>
+              <div class="perfil-mini-calendar" aria-hidden="true">
+                <span></span><span></span><span></span><span></span><span></span><span></span><span></span>
+              </div>
+              <button class="perfil-action" type="button" onclick="document.getElementById('carta-do-dia').scrollIntoView({behavior:'smooth'}); fecharPerfilModal();">Ver carta do dia</button>
+            </section>
+
+            <section class="perfil-widget perfil-week-widget">
+              <div class="perfil-widget-head">
+                <span>Historico emocional</span>
+                <strong>7 dias</strong>
+              </div>
+              <div class="perfil-bars" aria-hidden="true">
+                <span style="--h:34%"></span>
+                <span style="--h:52%"></span>
+                <span style="--h:28%"></span>
+                <span style="--h:68%"></span>
+                <span style="--h:46%"></span>
+                <span style="--h:76%"></span>
+                <span style="--h:58%"></span>
+              </div>
+              <p>Areas mais recorrentes aparecem aqui conforme novas leituras reais forem registradas.</p>
+            </section>
+
+            <section class="perfil-widget perfil-actions-widget">
+              <div class="perfil-widget-head">
+                <span>Acoes rapidas</span>
+              </div>
+              <button class="perfil-action" type="button" onclick="exportarMeusDados()">Exportar meus dados</button>
+              <button class="perfil-action" type="button" onclick="mudarPerfilTab('seguranca')">Atualizar senha</button>
+              <button class="perfil-action danger" type="button" onclick="excluirMinhaConta()">Excluir conta</button>
+            </section>
+
+            <section class="perfil-widget perfil-recent-widget">
+              <div class="perfil-widget-head">
+                <span>Leituras recentes</span>
+                <strong>Ao vivo</strong>
+              </div>
+              <div class="perfil-reading-list" id="perfilRecentReadings">
+                <div><span>Primeira leitura</span><small>Disponivel apos sua proxima consulta</small></div>
+                <div><span>Favoritos</span><small>Salve insights importantes em breve</small></div>
+                <div><span>Padroes</span><small>A IA acompanha repeticoes emocionais</small></div>
+              </div>
+            </section>
+          </div>
+          </section>
+
+          <section class="perfil-view" id="perfilViewHistorico">
+            <div class="perfil-view-head">
+              <div>
+                <p class="perfil-kicker">Arquivo intuitivo</p>
+                <h3>Historico e jornada espiritual</h3>
+              </div>
+              <button class="perfil-action" type="button" onclick="carregarPainelPerfil(true)">Atualizar</button>
+            </div>
+            <div class="perfil-panel-grid">
+              <article class="perfil-widget perfil-progress-widget">
+                <div class="perfil-widget-head"><span>Jornada espiritual</span><strong id="perfilJornadaProgresso">0%</strong></div>
+                <p class="perfil-level" id="perfilJornadaNivel">Iniciante Lunar</p>
+                <div class="perfil-progress-ring" aria-hidden="true"><span id="perfilJornadaRing">0</span></div>
+                <p id="perfilJornadaResumo">Use leituras, cartas do dia e mensagens para alimentar sua jornada.</p>
+              </article>
+              <article class="perfil-widget">
+                <div class="perfil-widget-head"><span>Padroes emocionais</span><strong>Ao vivo</strong></div>
+                <div class="perfil-reading-list" id="perfilJornadaPadroes"></div>
+              </article>
+              <article class="perfil-widget">
+                <div class="perfil-widget-head"><span>Leituras registradas</span><strong id="perfilHistoricoCount">0</strong></div>
+                <div class="perfil-reading-list" id="perfilHistoricoLista"></div>
+              </article>
+              <article class="perfil-widget">
+                <div class="perfil-widget-head"><span>Pagamentos recentes</span><strong id="perfilPagamentosCount">0</strong></div>
+                <div class="perfil-reading-list" id="perfilPagamentosLista"></div>
+              </article>
+            </div>
+          </section>
+
+          <section class="perfil-view" id="perfilViewCreditos">
+            <div class="perfil-view-head">
+              <div>
+                <p class="perfil-kicker">Saldo e movimentacao</p>
+                <h3>Painel de creditos</h3>
+              </div>
+              <button class="perfil-action" type="button" onclick="processarCheckout('leitura')">Comprar mais</button>
+            </div>
+            <div class="perfil-panel-grid">
+              <article class="perfil-widget">
+                <div class="perfil-widget-head"><span>Saldo atual</span><strong id="perfilCreditosSaldo">0</strong></div>
+                <p>Creditos sao usados para leituras e acessos premium conforme seu plano.</p>
+                <button class="perfil-action" type="button" onclick="processarCheckout('leitura')">Comprar leitura avulsa</button>
+              </article>
+              <article class="perfil-widget">
+                <div class="perfil-widget-head"><span>Extrato</span><strong id="perfilCreditosCount">0</strong></div>
+                <div class="perfil-reading-list" id="perfilCreditosLista"></div>
+              </article>
+            </div>
+            <div class="perfil-plan-options">
+              <article class="perfil-widget">
+                <div class="perfil-widget-head"><span>Recarregar</span><strong>Avulso</strong></div>
+                <p>100 creditos por R$ 19,90. Equivale a 2 tiragens de 3 cartas.</p>
+                <button class="perfil-action" type="button" onclick="processarCheckout('recarga_100')">Comprar 100 creditos</button>
+              </article>
+              <article class="perfil-widget">
+                <div class="perfil-widget-head"><span>Recarga media</span><strong>R$ 49,90</strong></div>
+                <p>300 creditos para 6 tiragens de 3 cartas, sem assinatura.</p>
+                <button class="perfil-action" type="button" onclick="processarCheckout('recarga_300')">Comprar 300 creditos</button>
+              </article>
+              <article class="perfil-widget">
+                <div class="perfil-widget-head"><span>Recarga alta</span><strong>R$ 79,90</strong></div>
+                <p>500 creditos para 10 tiragens de 3 cartas.</p>
+                <button class="perfil-action" type="button" onclick="processarCheckout('recarga_500')">Comprar 500 creditos</button>
+              </article>
+              <article class="perfil-widget">
+                <div class="perfil-widget-head"><span>Recarga completa</span><strong>R$ 199,90</strong></div>
+                <p>1.500 creditos para 30 tiragens avulsas, sem assinatura.</p>
+                <button class="perfil-action" type="button" onclick="processarCheckout('recarga_1500')">Comprar 1.500 creditos</button>
+              </article>
+              <article class="perfil-widget">
+                <div class="perfil-widget-head"><span>Plano mensal</span><strong>R$ 49,90</strong></div>
+                <p>1.500 creditos mensais, renovados a cada pagamento. Equivale a 30 tiragens de 3 cartas.</p>
+                <button class="perfil-action" type="button" onclick="iniciarPagamento('assinatura_mensal')">Assinar mensal</button>
+              </article>
+              <article class="perfil-widget">
+                <div class="perfil-widget-head"><span>Plano anual</span><strong>R$ 397,00</strong></div>
+                <p>18.250 creditos anuais. Equivale a 365 tiragens de 3 cartas.</p>
+                <button class="perfil-action" type="button" onclick="processarCheckout('assinatura_anual')">Assinar anual</button>
+              </article>
+            </div>
+          </section>
+
+          <section class="perfil-view" id="perfilViewConfiguracoes">
+
+          <div class="perfil-tabs">
+            <button class="perfil-tab active" id="perfilTabDados" onclick="mudarPerfilTab('dados')">Dados</button>
+            <button class="perfil-tab" id="perfilTabSeguranca" onclick="mudarPerfilTab('seguranca')">Seguranca</button>
+          </div>
+
+          <form class="modal-form perfil-form-grid" id="perfilFormDados" onsubmit="salvarPerfil(event)">
+            <div class="perfil-form-full auth-avatar-card perfil-avatar-editor">
+              <div class="auth-avatar-demo">
+                <span class="avatar-shell auth-avatar-preview">
+                  <img id="perfilEditAvatarPreviewImg" class="avatar-image" src="" alt="" hidden />
+                  <span class="avatar-fallback" id="perfilEditAvatarPreviewFallback">ML</span>
+                </span>
+                <span class="auth-avatar-badge">6</span>
+              </div>
+              <div class="auth-avatar-copy">
+                <strong>Foto da conta</strong>
+                <span>Atualize a URL para trocar a imagem exibida no login, header e perfil.</span>
+              </div>
+            </div>
+            <div class="input-group">
+              <label class="input-label">Nome</label>
+              <input type="text" class="modal-input" id="perfilNome" minlength="2" />
+            </div>
+            <div class="input-group">
+              <label class="input-label">E-mail</label>
+              <input type="email" class="modal-input" id="perfilEmailInput" disabled />
+            </div>
+            <div class="input-group perfil-form-full">
+              <label class="input-label">URL da imagem do perfil</label>
+              <input type="url" class="modal-input" id="perfilAvatarUrl" placeholder="https://exemplo.com/avatar.jpg" oninput="atualizarPerfilAvatarPreview()" />
+            </div>
+            <div class="input-group perfil-form-full">
+              <label class="input-label">WhatsApp</label>
+              <input type="tel" class="modal-input" id="perfilWhatsapp" placeholder="+55 11 99999-9999" />
+            </div>
+            <label class="modal-terms perfil-form-full" style="display:flex; gap:10px; align-items:flex-start; text-align:left;">
+              <input type="checkbox" id="perfilWhatsappOptIn" style="margin-top:3px;" />
+              Receber mensagens e lembretes pelo WhatsApp.
+            </label>
+            <label class="modal-terms perfil-form-full" style="display:flex; gap:10px; align-items:flex-start; text-align:left;">
+              <input type="checkbox" id="perfilEmailOptIn" style="margin-top:3px;" />
+              Receber emails transacionais, lembretes e campanhas.
+            </label>
+            <div class="form-error perfil-form-full" id="erroPerfil" style="display:none"></div>
+            <button class="btn btn-primary btn-full btn-lg perfil-form-full" id="btnSalvarPerfil" type="submit">Salvar Perfil</button>
+          </form>
+
+          <form class="modal-form perfil-form-grid" id="perfilFormSeguranca" onsubmit="salvarSenha(event)" style="display:none">
+            <div class="input-group">
+              <label class="input-label">Senha atual</label>
+              <input type="password" class="modal-input" id="perfilSenhaAtual" autocomplete="current-password" />
+            </div>
+            <div class="input-group">
+              <label class="input-label">Nova senha</label>
+              <input type="password" class="modal-input" id="perfilNovaSenha" minlength="8" autocomplete="new-password" />
+            </div>
+            <div class="input-group perfil-form-full">
+              <label class="input-label">Confirmar nova senha</label>
+              <input type="password" class="modal-input" id="perfilConfirmaSenha" minlength="8" autocomplete="new-password" />
+            </div>
+            <div class="form-error perfil-form-full" id="erroSenha" style="display:none"></div>
+            <button class="btn btn-primary btn-full btn-lg perfil-form-full" id="btnSalvarSenha" type="submit">Atualizar Senha</button>
+            <div class="profile-danger-zone perfil-form-full">
+              <p>Baixe um arquivo JSON com seus dados pessoais, leituras, pagamentos e mensagens registradas.</p>
+              <p>A exclusao anonimiza seus dados pessoais e desativa o acesso, preservando registros obrigatorios.</p>
+            </div>
+          </form>
+          </section>
+        </main>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal-overlay" id="ritualOverlay" style="display:none" onclick="fecharRitualModal(event)">
+    <div class="modal ritual-modal">
+      <button class="modal-close" onclick="fecharRitualModal()">&#10005;</button>
+      <p class="section-eyebrow" id="ritualModalTema">Ritual</p>
+      <h3 class="modal-title" id="ritualModalNome">Ritual do Luar</h3>
+      <p class="modal-subtitle" id="ritualModalDescricao"></p>
+      <div class="ritual-assets" id="ritualModalAssets"></div>
+      <div class="ritual-coupon-row" id="ritualCouponRow">
+        <input class="modal-input" id="ritualCouponInput" placeholder="Cupom opcional" />
+      </div>
+      <button class="btn btn-primary btn-full btn-lg" id="ritualModalCta" onclick="comprarRitualSelecionado()">Acessar ritual</button>
+      <p class="modal-hint" id="ritualModalHint"></p>
+    </div>
+  </div>
+
+  <div class="modal-overlay" id="paymentOverlay" style="display:none" onclick="fecharPaymentModal(event)">
+    <div class="modal auth-modal" id="paymentModal" role="dialog" aria-modal="true" aria-labelledby="paymentModalTitle">
+      <button class="modal-close" onclick="fecharPaymentModal()">&#10005;</button>
+      <div class="modal-icon">&#128176;</div>
+      <h3 class="modal-title" id="paymentModalTitle">Como prefere acessar?</h3>
+      <p class="modal-subtitle">Escolha sua forma de pagamento segura</p>
+      
+      <div style="display: flex; flex-direction: column; gap: 15px; margin-top: 25px;">
+        <button class="btn btn-primary btn-full btn-lg" onclick="processarCheckout(planoCheckoutAtual)" style="display: flex; align-items: center; justify-content: center; gap: 10px;">
+          <span>&#128179;</span>
+          <div style="text-align: left;">
+            <div style="font-weight: 600;">Cart&atilde;o de Cr&eacute;dito</div>
+            <div style="font-size: 0.8rem; opacity: 0.8; font-weight: 400;">Assinatura mensal com renova&ccedil;&atilde;o autom&aacute;tica</div>
+          </div>
+        </button>
+        
+        <button class="btn btn-outline btn-full btn-lg" onclick="processarCheckout(planoCheckoutAtual)" style="display: flex; align-items: center; justify-content: center; gap: 10px; border-color: #32c18f; color: #32c18f;">
+          <span>&#10026;</span>
+          <div style="text-align: left;">
+            <div style="font-weight: 600;">Pix</div>
+            <div style="font-size: 0.8rem; opacity: 0.8; font-weight: 400;">Escolha Pix dentro do checkout Mercado Pago</div>
+          </div>
+        </button>
+      </div>
+      <p class="modal-terms" style="margin-top: 20px;">Pagamento 100% seguro via Mercado Pago</p>
+    </div>
+  </div>
+
+  <!-- Toast de notificação -->
+  <div class="toast" id="toast" style="display:none"></div>
+
+  <script src="app.js?v=20260519-profile-after-login"></script>
+</body>
+</html>

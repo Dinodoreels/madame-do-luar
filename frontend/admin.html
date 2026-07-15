@@ -1,0 +1,477 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Admin | Madame do Luar</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@600;700&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="admin.css?v=20260518-hidden-fix" />
+</head>
+<body>
+  <main id="adminLogin" class="login-screen" hidden>
+    <div class="login-atmosphere" aria-hidden="true"></div>
+    <section class="login-panel">
+      <span class="login-mark">ML</span>
+      <p class="eyebrow">Observatorio Operacional</p>
+      <h1>Madame do Luar</h1>
+      <p class="muted">Entre na central de inteligencia, pagamentos, leituras e automacoes da plataforma.</p>
+      <form id="adminLoginForm" class="form-stack" onsubmit="login(event)">
+        <label>E-mail<input id="adminEmail" type="email" required autocomplete="email" /></label>
+        <label>Senha<input id="adminPassword" type="password" required autocomplete="current-password" /></label>
+        <button id="adminLoginButton" type="submit">Entrar no painel</button>
+      </form>
+      <div id="loginError" class="notice error" hidden></div>
+    </section>
+  </main>
+
+  <main id="adminApp" class="admin-shell" hidden>
+    <aside class="sidebar">
+      <div class="brand">
+        <span class="brand-mark">ML</span>
+        <div>
+          <strong>Madame do Luar</strong>
+          <small>Admin Intelligence</small>
+        </div>
+      </div>
+      <nav class="nav">
+        <div class="nav-section">
+          <span>Central</span>
+          <button class="nav-item active" data-icon="D" data-view="dashboard">Dashboard</button>
+          <button class="nav-item" data-icon="A" data-view="status">Analytics</button>
+          <button class="nav-item" data-icon="S" data-view="ops">Falhas</button>
+        </div>
+        <div class="nav-section">
+          <span>Operacao</span>
+          <button class="nav-item" data-icon="U" data-view="users">Usuarios</button>
+          <button class="nav-item" data-icon="L" data-view="readings">Leituras</button>
+          <button class="nav-item" data-icon="P" data-view="payments">Pagamentos</button>
+          <button class="nav-item" data-icon="M" data-view="messages">Mensagens</button>
+        </div>
+        <div class="nav-section">
+          <span>Crescimento</span>
+          <button class="nav-item" data-icon="R" data-view="rituals">Rituais</button>
+          <button class="nav-item" data-icon="C" data-view="plans">Creditos</button>
+          <button class="nav-item" data-icon="G" data-view="campaigns">Campanhas</button>
+          <button class="nav-item" data-icon="V" data-view="crm">CRM</button>
+        </div>
+        <div class="nav-section">
+          <span>Sistema</span>
+          <button class="nav-item" data-icon="I" data-view="prompts">Prompts IA</button>
+          <button class="nav-item" data-icon="O" data-view="logs">Logs</button>
+          <button class="nav-item" data-icon="T" data-view="audit">Auditoria</button>
+          <button class="nav-item" data-icon="K" data-view="settings">Configuracoes</button>
+        </div>
+      </nav>
+      <div class="sidebar-status">
+        <small>Ambiente</small>
+        <strong>Operacao local</strong>
+      </div>
+      <button id="adminLogout" class="ghost-button">Sair</button>
+    </aside>
+
+    <section class="workspace">
+      <header class="topbar">
+        <div>
+          <p class="eyebrow" id="viewBreadcrumb">Centro de controle</p>
+          <h2 id="viewTitle">Dashboard</h2>
+        </div>
+        <div class="topbar-actions">
+          <input id="globalSearch" type="search" placeholder="Buscar na tela atual" />
+          <span class="health-pill" id="adminHealthPill">Health sync</span>
+          <button id="refreshBtn" class="secondary-button">Atualizar</button>
+        </div>
+      </header>
+
+      <div id="statusNotice" class="notice" hidden></div>
+
+      <section id="view-dashboard" class="view active">
+        <div class="metric-grid" id="dashboardMetrics"></div>
+        <div class="analytics-grid">
+          <article class="panel chart-panel">
+            <div class="panel-head"><h3>Receita e conversao</h3><span class="panel-kicker">janela operacional</span></div>
+            <div id="revenueChart" class="bar-chart"></div>
+          </article>
+          <article class="panel chart-panel">
+            <div class="panel-head"><h3>Uso da IA</h3><span class="panel-kicker">leituras e custo</span></div>
+            <div id="aiChart" class="line-chart"></div>
+          </article>
+        </div>
+        <div class="split-grid">
+          <article class="panel">
+            <div class="panel-head"><h3>Usuarios quentes</h3><button data-action="loadHotUsers">Gerar</button></div>
+            <div id="hotUsersList" class="compact-list"></div>
+          </article>
+          <article class="panel">
+            <div class="panel-head"><h3>Alertas internos</h3><button data-action="generateAlerts">Verificar</button></div>
+            <div id="alertsList" class="compact-list"></div>
+          </article>
+        </div>
+      </section>
+
+      <section id="view-users" class="view">
+        <div class="table-toolbar">
+          <button data-action="loadUsers">Recarregar usuarios</button>
+          <select id="userStatusFilter" data-filter>
+            <option value="">Todos status</option>
+            <option value="ativo">Ativo</option>
+            <option value="bloqueado">Bloqueado</option>
+            <option value="inativo">Inativo</option>
+          </select>
+          <select id="userPlanFilter" data-filter>
+            <option value="">Todos planos</option>
+            <option value="assinante">Assinantes</option>
+            <option value="sem_plano">Sem plano</option>
+          </select>
+          <input id="userDateFromFilter" data-filter type="date" />
+        </div>
+        <div id="usersTable"></div>
+        <div id="userDetail" class="panel" hidden></div>
+      </section>
+
+      <section id="view-readings" class="view">
+        <div class="table-toolbar">
+          <button data-action="loadReadings">Recarregar leituras</button>
+          <select id="readingStatusFilter" data-filter>
+            <option value="">Todos status</option>
+            <option value="done">Concluidas</option>
+            <option value="pending">Pendentes</option>
+            <option value="error">Falhas</option>
+          </select>
+          <input id="readingDateFromFilter" data-filter type="date" />
+        </div>
+        <div id="readingsTable"></div>
+      </section>
+
+      <section id="view-payments" class="view">
+        <div class="table-toolbar">
+          <button data-action="loadPayments">Recarregar pagamentos</button>
+          <button data-action="recoverPix">Recuperar PIX abandonado</button>
+          <select id="paymentStatusFilter" data-filter>
+            <option value="">Todos status</option>
+            <option value="approved">Aprovados</option>
+            <option value="pending">Pendentes</option>
+            <option value="failed">Falhos</option>
+            <option value="error">Erro</option>
+            <option value="abandoned">Abandonados</option>
+          </select>
+          <input id="paymentDateFromFilter" data-filter type="date" />
+        </div>
+        <div id="paymentsTable"></div>
+      </section>
+
+      <section id="view-messages" class="view">
+        <div class="table-toolbar">
+          <button data-action="loadMessages">Recarregar mensagens</button>
+          <select id="messageStatusFilter" data-filter>
+            <option value="">Todos status</option>
+            <option value="pending">Pendentes</option>
+            <option value="sent">Enviadas</option>
+            <option value="failed">Falhas</option>
+            <option value="skipped">Simuladas/Ignoradas</option>
+          </select>
+          <select id="messageChannelFilter" data-filter>
+            <option value="">Todos canais</option>
+            <option value="whatsapp">WhatsApp</option>
+            <option value="email">Email</option>
+          </select>
+          <input id="messageDateFromFilter" data-filter type="date" />
+        </div>
+        <div id="messagesTable"></div>
+        <div id="notificationLogsTable"></div>
+      </section>
+
+      <section id="view-rituals" class="view">
+        <div class="editor-grid two">
+          <form id="ritualForm" class="panel form-stack">
+            <h3>Novo ritual</h3>
+            <label>Nome<input name="nome" required /></label>
+            <label>Tema<input name="tema" placeholder="amor, protecao, prosperidade..." /></label>
+            <label>Descricao<textarea name="descricao" rows="4"></textarea></label>
+            <label>Custo em creditos<input name="preco" type="number" min="0" step="1" value="0" /></label>
+            <label>PDF URL<input name="pdf_url" /></label>
+            <label>Audio URL<input name="audio_url" /></label>
+            <label class="check"><input name="ativo" type="checkbox" checked /> ativo</label>
+            <button type="submit">Salvar ritual</button>
+          </form>
+          <div id="ritualsTable"></div>
+        </div>
+        <div id="ritualPurchasesTable"></div>
+      </section>
+
+      <section id="view-plans" class="view">
+        <div class="editor-grid">
+          <form id="planForm" class="panel form-stack">
+            <h3>Novo plano</h3>
+            <label>Nome<input name="name" required /></label>
+            <label>Descricao<input name="description" /></label>
+            <label>Preco<input name="price" type="number" min="0" step="0.01" value="0" /></label>
+            <label>Creditos<input name="credits" type="number" min="0" value="0" /></label>
+            <label>Duracao em dias<input name="duration_days" type="number" min="1" value="30" /></label>
+            <label>Beneficios<textarea name="benefits" rows="4" placeholder="Um beneficio por linha"></textarea></label>
+            <button type="submit">Criar plano</button>
+          </form>
+          <form id="packageForm" class="panel form-stack">
+            <h3>Novo pacote</h3>
+            <label>Nome<input name="name" required /></label>
+            <label>Preco<input name="price" type="number" min="0" step="0.01" value="0" /></label>
+            <label>Creditos<input name="credits" type="number" min="1" value="5" /></label>
+            <label>Bonus<input name="bonus_credits" type="number" min="0" value="0" /></label>
+            <button type="submit">Criar pacote</button>
+          </form>
+          <form id="couponForm" class="panel form-stack">
+            <h3>Novo cupom</h3>
+            <label>Codigo<input name="code" required /></label>
+            <label>Tipo<select name="discount_type"><option value="percent">Percentual</option><option value="fixed">Valor fixo</option></select></label>
+            <label>Desconto<input name="discount_value" type="number" min="0" step="0.01" value="10" /></label>
+            <label>Aplicar em<select name="applies_to"><option value="all">Todos</option><option value="ritual">Rituais</option><option value="plan">Assinaturas</option><option value="package">Pacotes</option><option value="reading">Leitura</option></select></label>
+            <label>Evento<input name="event_type" placeholder="after_reading, downsell, birthday" /></label>
+            <label>Uso maximo<input name="max_uses" type="number" min="1" /></label>
+            <button type="submit">Criar cupom</button>
+          </form>
+        </div>
+        <div class="split-grid">
+          <div id="plansTable"></div>
+          <div id="packagesTable"></div>
+        </div>
+        <div id="couponsTable"></div>
+      </section>
+
+      <section id="view-campaigns" class="view">
+        <div class="editor-grid two">
+          <form id="campaignForm" class="panel form-stack">
+            <h3>Nova campanha</h3>
+            <label>Nome<input name="name" required /></label>
+            <label>Evento<input name="event_type" value="marketing" required /></label>
+            <label>Canal<select name="channel"><option value="whatsapp">WhatsApp</option><option value="email">Email</option></select></label>
+            <label>Assunto<input name="subject" placeholder="usado no email" /></label>
+            <label>Delay em minutos<input name="delay_minutes" type="number" min="0" value="0" /></label>
+            <label>Mensagem<textarea name="template" rows="6" required placeholder="{{nome}}, temos um recado para voce: {{link}}"></textarea></label>
+            <button type="submit">Criar campanha</button>
+          </form>
+          <div id="campaignsTable"></div>
+        </div>
+        <div id="campaignStepsTable"></div>
+      </section>
+
+      <section id="view-crm" class="view">
+        <div class="table-toolbar">
+          <button data-action="loadCrm">Recarregar CRM</button>
+          <button data-action="classifyCrm">Classificar clientes</button>
+          <button data-action="exportCrm">Exportar CSV</button>
+          <select id="crmClassFilter" data-filter>
+            <option value="">Todas classes</option>
+            <option value="cliente_novo">Novo</option>
+            <option value="cliente_recorrente">Recorrente</option>
+            <option value="cliente_vip">VIP</option>
+            <option value="cliente_inativo">Inativo</option>
+          </select>
+        </div>
+
+        <div id="crmUsersTable"></div>
+        <div id="crmUserDetail" class="panel" hidden></div>
+
+        <div class="editor-grid two">
+          <form id="crmTagForm" class="panel form-stack">
+            <h3>Nova tag</h3>
+            <label>Nome<input name="name" required /></label>
+            <label>Descricao<input name="description" /></label>
+            <label>Cor<input name="color" value="#d8b75c" /></label>
+            <button type="submit">Criar tag</button>
+          </form>
+          <form id="crmSegmentForm" class="panel form-stack">
+            <h3>Novo segmento</h3>
+            <label>Nome<input name="name" required /></label>
+            <label>Descricao<input name="description" /></label>
+            <label>Regra JSON<textarea name="rules" rows="4" placeholder='{"class":"cliente_vip"}'></textarea></label>
+            <button type="submit">Criar segmento</button>
+          </form>
+        </div>
+
+        <div class="editor-grid two">
+          <form id="crmTriggerForm" class="panel form-stack">
+            <h3>Novo gatilho por segmento</h3>
+            <label>Segmento<select name="segment_id" id="crmTriggerSegmentSelect" required></select></label>
+            <label>Nome<input name="name" required /></label>
+            <label>Evento<input name="event_type" value="segment_entry" /></label>
+            <label>Canal<select name="channel"><option value="whatsapp">WhatsApp</option><option value="email">Email</option></select></label>
+            <label>Mensagem<textarea name="template" rows="5" placeholder="{{nome}}, temos uma oferta especial para voce."></textarea></label>
+            <button type="submit">Criar gatilho</button>
+          </form>
+          <div id="crmTagsSegmentsTable"></div>
+        </div>
+
+        <div id="crmTriggersTable"></div>
+      </section>
+
+      <section id="view-prompts" class="view">
+        <div class="editor-grid two">
+          <form id="promptForm" class="panel form-stack">
+            <h3>Novo prompt</h3>
+            <label>Nome<input name="name" required /></label>
+            <label>Tipo de leitura<input name="reading_type" required placeholder="amor, geral, dinheiro..." /></label>
+            <label>Conteudo<textarea name="content" rows="8" required></textarea></label>
+            <button type="submit">Salvar prompt</button>
+          </form>
+          <article class="panel prompt-ops-panel">
+            <div class="panel-head">
+              <div>
+                <h3>Prompts da Madame</h3>
+                <span class="panel-kicker">edicao operacional</span>
+              </div>
+              <button data-action="loadPrompts">Recarregar</button>
+            </div>
+            <div id="promptsTable"></div>
+          </article>
+        </div>
+      </section>
+
+      <section id="view-logs" class="view">
+        <div class="table-toolbar">
+          <button data-action="loadLogs">Recarregar logs</button>
+          <select id="logSeverityFilter" data-filter>
+            <option value="">Todas severidades</option>
+            <option value="info">Info</option>
+            <option value="warning">Warning</option>
+            <option value="error">Error</option>
+            <option value="critical">Critical</option>
+          </select>
+        </div>
+        <div id="logsTable"></div>
+      </section>
+
+      <section id="view-audit" class="view">
+        <div class="table-toolbar">
+          <button data-action="loadAudit">Recarregar auditoria</button>
+          <select id="auditEntityFilter" data-filter>
+            <option value="">Todas entidades</option>
+            <option value="users">Usuarios</option>
+            <option value="payments">Pagamentos</option>
+            <option value="credit_transactions">Creditos</option>
+            <option value="settings">Configuracoes</option>
+          </select>
+          <select id="auditSeverityFilter" data-filter>
+            <option value="">Todas severidades</option>
+            <option value="info">Info</option>
+            <option value="warning">Warning</option>
+            <option value="error">Error</option>
+            <option value="critical">Critical</option>
+          </select>
+        </div>
+        <div id="auditTable"></div>
+      </section>
+
+      <section id="view-status" class="view">
+        <div class="table-toolbar">
+          <button data-action="loadStatusPanel">Recarregar status</button>
+          <button data-action="runDailyCheck">Executar verificacao diaria</button>
+          <button data-action="generateAlerts">Gerar alertas</button>
+        </div>
+        <div class="metric-grid" id="statusHealthMetrics"></div>
+        <div class="split-grid">
+          <article class="panel">
+            <div class="panel-head"><h3>Conversao</h3></div>
+            <div class="metric-grid" id="conversionMetrics"></div>
+          </article>
+          <article class="panel">
+            <div class="panel-head"><h3>Retencao</h3></div>
+            <div class="metric-grid" id="retentionMetrics"></div>
+          </article>
+        </div>
+        <div class="split-grid">
+          <article class="panel">
+            <div class="panel-head"><h3>Receita</h3></div>
+            <div class="metric-grid" id="revenueMetrics"></div>
+          </article>
+          <article class="panel">
+            <div class="panel-head"><h3>Saude das integracoes</h3></div>
+            <div id="healthChecksTable"></div>
+          </article>
+        </div>
+        <div class="split-grid">
+          <article class="panel">
+            <div class="panel-head"><h3>Alertas abertos</h3></div>
+            <div id="statusAlertsTable"></div>
+          </article>
+          <article class="panel">
+            <div class="panel-head"><h3>Mensagens pendentes</h3></div>
+            <div id="statusPendingMessagesTable"></div>
+          </article>
+        </div>
+      </section>
+
+      <section id="view-ops" class="view">
+        <div class="metric-grid" id="opsReports"></div>
+        <div class="split-grid">
+          <article class="panel">
+            <div class="panel-head"><h3>Fila de reprocessamento</h3><button data-action="loadQueue">Recarregar</button></div>
+            <form id="queueForm" class="inline-form">
+              <select name="type"><option value="webhook">Webhook</option><option value="reading">Leitura</option><option value="payment">Pagamento</option><option value="notification">Notificacao</option></select>
+              <button type="submit">Enfileirar</button>
+            </form>
+            <div id="queueTable"></div>
+          </article>
+          <article class="panel">
+            <div class="panel-head"><h3>Erros recentes</h3><button data-action="loadErrors">Recarregar</button></div>
+            <div id="errorsTable"></div>
+          </article>
+        </div>
+      </section>
+
+      <section id="view-settings" class="view">
+        <div class="editor-grid two">
+          <article class="panel">
+            <h3>Modo manutencao</h3>
+            <form id="maintenanceForm" class="form-stack">
+              <label class="switch-row"><input name="enabled" type="checkbox" /> Ativar bloqueio de leituras e PIX</label>
+              <label>Mensagem<input name="message" value="Sistema em manutencao. Tente novamente em instantes." /></label>
+              <button type="submit">Salvar manutencao</button>
+            </form>
+          </article>
+          <article class="panel">
+            <h3>Configuracoes do sistema</h3>
+            <form id="settingForm" class="inline-form">
+              <input name="key" placeholder="chave" required />
+              <input name="value" placeholder="valor" required />
+              <label class="check"><input name="is_secret" type="checkbox" /> secreto</label>
+              <button type="submit">Salvar</button>
+            </form>
+            <div id="settingsTable"></div>
+          </article>
+        </div>
+      </section>
+    </section>
+  </main>
+
+  <div id="promptEditModal" class="modal-backdrop" hidden>
+    <section class="modal-panel prompt-modal" role="dialog" aria-modal="true" aria-labelledby="promptModalTitle">
+      <header class="modal-head">
+        <div>
+          <p class="eyebrow">Sistema de IA</p>
+          <h3 id="promptModalTitle">Editar prompt da Madame</h3>
+        </div>
+        <button type="button" class="icon-button" data-modal-close aria-label="Fechar modal">X</button>
+      </header>
+      <form id="promptEditForm" class="form-stack">
+        <input type="hidden" name="prompt_id" />
+        <div class="editor-grid two prompt-modal-grid">
+          <label>Nome<input name="name" required /></label>
+          <label>Tipo de leitura<input name="reading_type" required /></label>
+        </div>
+        <div class="editor-grid two prompt-modal-grid">
+          <label>Versao<input name="version" type="number" min="1" step="1" required /></label>
+          <label>Status<select name="status"><option value="active">Ativo</option><option value="inactive">Inativo</option></select></label>
+        </div>
+        <label>Prompt principal<textarea name="content" rows="14" required></textarea></label>
+        <div class="modal-actions">
+          <button type="button" class="secondary-button" data-modal-close>Cancelar</button>
+          <button type="submit">Salvar alteracoes</button>
+        </div>
+      </form>
+    </section>
+  </div>
+
+  <script src="admin.js?v=20260518-admin-login-gate"></script>
+</body>
+</html>

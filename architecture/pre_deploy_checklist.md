@@ -1,0 +1,24 @@
+# Checklist de Pre-Deploy
+
+- [ ] `python -B tools\predeploy_check.py --env-file .env.production` executa sem falhas.
+- [ ] `python -B tools\validate_environment.py --env-file .env.production --environment production` executa sem falhas.
+- [ ] `APP_ENV=production`.
+- [ ] `ENVIRONMENT_NAME=production`.
+- [ ] `APP_BASE_URL` usa HTTPS real.
+- [ ] `APP_CORS_ORIGINS` contem apenas dominios HTTPS de producao.
+- [ ] `ADMIN_DIRECT_ACCESS=false`.
+- [ ] `ALLOW_MOCK_PAYMENTS=false`.
+- [ ] `ALLOW_SIMULATED_NOTIFICATIONS=false`.
+- [ ] `JWT_SECRET` tem mais de 32 caracteres e nao esta em arquivo publico.
+- [ ] Secrets de local, homologacao e producao estao separados.
+- [ ] Supabase de producao esta escolhido e com migrations aplicadas.
+- [ ] `python tools\verify_schema_phase3.py` passou contra o Supabase de producao.
+- [ ] Mercado Pago esta em `MERCADO_PAGO_ENV=production` e com webhook do dominio final.
+- [ ] `MERCADO_PAGO_NOTIFICATION_URL` aponta para `https://madamedoluar.com.br/api/webhook/mercado-pago`.
+- [ ] Uazapi/WhatsApp esta conectado e com numero de teste validado.
+- [ ] SMTP validado com conta final.
+- [ ] `python -B tools\daily_operation_check.py` executa sem erro.
+- [ ] Backup atual criado antes do deploy.
+- [ ] Admin principal esta em `ADMIN_EMAILS` ou possui role `super_admin`.
+- [ ] Paginas legais publicadas: `/privacidade.html`, `/termos.html`, `/ia.html`.
+- [ ] Plano de rollback lido e responsavel definido.

@@ -1,0 +1,48 @@
+# Secrets and local environment
+.env
+.env.*
+!.env.example
+!.env.homologation.example
+!.env.production.example
+
+# Python
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.venv/
+venv/
+
+# Node / frontend tooling
+node_modules/
+test-results/
+playwright-report/
+coverage/
+dist/
+build/
+
+# Runtime artifacts
+.tmp/
+logs/
+backups/
+*.log
+*.pid
+
+# Local IDE / agent state
+.vscode/
+.cursor/
+.codex/
+.agents/
+.claude/
+.claude-flow/
+MCPS/
+
+# Local-only project history and generated reports
+docs/internal-local/
+findings.md
+progress.md
+
+# OS files
+Thumbs.db
+.DS_Store

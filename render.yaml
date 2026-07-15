@@ -1,0 +1,232 @@
+services:
+  - type: web
+    name: madame-do-luar-web
+    runtime: python
+    plan: starter
+    region: ohio
+    buildCommand: pip install -r requirements.txt
+    startCommand: uvicorn api:app --host 0.0.0.0 --port $PORT
+    healthCheckPath: /health/detailed
+    maxShutdownDelaySeconds: 60
+    domains:
+      - madamedoluar.com.br
+      - www.madamedoluar.com.br
+    envVars:
+      - key: APP_ENV
+        value: production
+      - key: ENVIRONMENT_NAME
+        value: production
+      - key: ADMIN_DIRECT_ACCESS
+        value: "false"
+      - key: APP_BASE_URL
+        value: https://madamedoluar.com.br
+      - key: APP_CORS_ORIGINS
+        value: https://madamedoluar.com.br,https://www.madamedoluar.com.br
+      - key: PIX_GATEWAY
+        value: mercado_pago
+      - key: PIX_CURRENCY
+        value: BRL
+      - key: ALLOW_MOCK_PAYMENTS
+        value: "false"
+      - key: MERCADO_PAGO_ENV
+        value: production
+      - key: MERCADO_PAGO_NOTIFICATION_URL
+        value: https://madamedoluar.com.br/api/webhook/mercado-pago
+      - key: GEMINI_MODEL
+        value: gemini-2.5-flash
+      - key: LOG_LEVEL
+        value: INFO
+      - key: JWT_SECRET
+        generateValue: true
+      - key: ADMIN_EMAILS
+        sync: false
+      - key: GEMINI_API_KEY
+        sync: false
+      - key: OPENAI_API_KEY
+        sync: false
+      - key: SUPABASE_URL
+        sync: false
+      - key: SUPABASE_KEY
+        sync: false
+      - key: SUPABASE_DB_PASSWORD
+        sync: false
+      - key: MERCADO_PAGO_PUBLIC_KEY
+        sync: false
+      - key: MERCADO_PAGO_ACCESS_TOKEN
+        sync: false
+      - key: MERCADO_PAGO_WEBHOOK_SECRET
+        sync: false
+      - key: WHATSAPP_PROVIDER
+        value: uazapi
+      - key: WHATSAPP_API_URL
+        sync: false
+      - key: WHATSAPP_API_TOKEN
+        sync: false
+      - key: WHATSAPP_TEST_NUMBER
+        sync: false
+      - key: UAZAPI_CONVERT
+        value: "true"
+      - key: WHATSAPP_SEND_DELAY_MS
+        value: "800"
+      - key: WHATSAPP_LINK_PREVIEW
+        value: "false"
+      - key: ALLOW_SIMULATED_NOTIFICATIONS
+        value: "false"
+      - key: SMTP_HOST
+        value: smtp.gmail.com
+      - key: SMTP_PORT
+        value: "587"
+      - key: SMTP_USER
+        sync: false
+      - key: SMTP_PASS
+        sync: false
+
+  - type: worker
+    name: madame-do-luar-worker
+    runtime: python
+    plan: starter
+    region: ohio
+    buildCommand: pip install -r requirements.txt
+    startCommand: python tools/automation_worker.py
+    maxShutdownDelaySeconds: 60
+    envVars:
+      - fromService:
+          type: web
+          name: madame-do-luar-web
+          envVarKey: APP_ENV
+        key: APP_ENV
+      - fromService:
+          type: web
+          name: madame-do-luar-web
+          envVarKey: SUPABASE_URL
+        key: SUPABASE_URL
+      - fromService:
+          type: web
+          name: madame-do-luar-web
+          envVarKey: SUPABASE_KEY
+        key: SUPABASE_KEY
+      - fromService:
+          type: web
+          name: madame-do-luar-web
+          envVarKey: GEMINI_API_KEY
+        key: GEMINI_API_KEY
+      - fromService:
+          type: web
+          name: madame-do-luar-web
+          envVarKey: WHATSAPP_API_URL
+        key: WHATSAPP_API_URL
+      - fromService:
+          type: web
+          name: madame-do-luar-web
+          envVarKey: WHATSAPP_API_TOKEN
+        key: WHATSAPP_API_TOKEN
+      - fromService:
+          type: web
+          name: madame-do-luar-web
+          envVarKey: SMTP_USER
+        key: SMTP_USER
+      - fromService:
+          type: web
+          name: madame-do-luar-web
+          envVarKey: SMTP_PASS
+        key: SMTP_PASS
+      - key: AUTOMATION_WORKER_INTERVAL_SECONDS
+        value: "300"
+      - key: AUTOMATION_SYNC_RULES_ON_START
+        value: "true"
+      - key: AUTOMATION_RETRY_DELAY_MINUTES
+        value: "30"
+
+  - type: cron
+    name: madame-do-luar-daily-check
+    runtime: python
+    plan: starter
+    region: ohio
+    schedule: "0 9 * * *"
+    buildCommand: pip install -r requirements.txt
+    startCommand: python tools/daily_operation_check.py
+    envVars:
+      - fromService:
+          type: web
+          name: madame-do-luar-web
+          envVarKey: APP_ENV
+        key: APP_ENV
+      - fromService:
+          type: web
+          name: madame-do-luar-web
+          envVarKey: SUPABASE_URL
+        key: SUPABASE_URL
+      - fromService:
+          type: web
+          name: madame-do-luar-web
+          envVarKey: SUPABASE_KEY
+        key: SUPABASE_KEY
+      - fromService:
+          type: web
+          name: madame-do-luar-web
+          envVarKey: GEMINI_API_KEY
+        key: GEMINI_API_KEY
+      - fromService:
+          type: web
+          name: madame-do-luar-web
+          envVarKey: MERCADO_PAGO_ACCESS_TOKEN
+        key: MERCADO_PAGO_ACCESS_TOKEN
+      - fromService:
+          type: web
+          name: madame-do-luar-web
+          envVarKey: MERCADO_PAGO_WEBHOOK_SECRET
+        key: MERCADO_PAGO_WEBHOOK_SECRET
+      - fromService:
+          type: web
+          name: madame-do-luar-web
+          envVarKey: WHATSAPP_API_URL
+        key: WHATSAPP_API_URL
+      - fromService:
+          type: web
+          name: madame-do-luar-web
+          envVarKey: WHATSAPP_API_TOKEN
+        key: WHATSAPP_API_TOKEN
+      - fromService:
+          type: web
+          name: madame-do-luar-web
+          envVarKey: SMTP_USER
+        key: SMTP_USER
+      - fromService:
+          type: web
+          name: madame-do-luar-web
+          envVarKey: SMTP_PASS
+        key: SMTP_PASS
+      - key: PENDING_MESSAGES_ALERT_THRESHOLD
+        value: "20"
+
+  - type: cron
+    name: madame-do-luar-backup-check
+    runtime: python
+    plan: starter
+    region: ohio
+    schedule: "30 3 * * *"
+    buildCommand: pip install -r requirements.txt
+    startCommand: python tools/backup_and_restore_check.py
+    envVars:
+      - fromService:
+          type: web
+          name: madame-do-luar-web
+          envVarKey: APP_ENV
+        key: APP_ENV
+      - fromService:
+          type: web
+          name: madame-do-luar-web
+          envVarKey: SUPABASE_URL
+        key: SUPABASE_URL
+      - fromService:
+          type: web
+          name: madame-do-luar-web
+          envVarKey: SUPABASE_KEY
+        key: SUPABASE_KEY
+      - fromService:
+          type: web
+          name: madame-do-luar-web
+          envVarKey: SUPABASE_DB_PASSWORD
+        key: SUPABASE_DB_PASSWORD
+      - key: BACKUP_DIR
+        value: backups

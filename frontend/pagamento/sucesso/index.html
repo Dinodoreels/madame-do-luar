@@ -1,0 +1,120 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Pagamento em confirmacao - Madame do Luar</title>
+  <link rel="stylesheet" href="../../style.css" />
+  <style>
+    body { min-height: 100vh; display: grid; place-items: center; padding: 24px; background: #100915; color: #fff; }
+    .return-panel { width: min(640px, 100%); padding: 32px; border: 1px solid rgba(220, 190, 120, .28); background: rgba(18, 12, 28, .9); border-radius: 8px; text-align: center; box-shadow: 0 24px 80px rgba(0,0,0,.35); }
+    .return-panel h1 { margin: 0 0 12px; font-size: 30px; }
+    .return-panel p { color: rgba(255,255,255,.78); line-height: 1.6; }
+    .payment-status { margin: 22px 0 0; padding: 16px; border: 1px solid rgba(255,255,255,.14); border-radius: 8px; background: rgba(255,255,255,.05); text-align: left; }
+    .payment-status strong { color: #f2cf7c; }
+    .return-actions { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; margin-top: 22px; }
+    .return-actions a, .return-actions button { text-decoration: none; }
+  </style>
+</head>
+<body>
+  <main class="return-panel">
+    <h1>Pagamento recebido pelo Mercado Pago</h1>
+    <p id="returnMessage">Estamos consultando a confirmacao segura do webhook para liberar creditos ou ativar sua assinatura.</p>
+    <div class="payment-status" id="paymentStatusBox">
+      <p><strong>Status:</strong> <span id="paymentStatusText">consultando...</span></p>
+      <p><strong>Produto:</strong> <span id="paymentProductText">--</span></p>
+      <p><strong>Assinatura:</strong> <span id="subscriptionText">--</span></p>
+    </div>
+    <div class="return-actions">
+      <a class="btn btn-primary" href="/#perfil">Ver meu perfil</a>
+      <button class="btn btn-outline" type="button" onclick="consultarPagamento()">Atualizar status</button>
+      <a class="btn btn-outline" href="/">Voltar ao portal</a>
+    </div>
+  </main>
+  <script>
+    const params = new URLSearchParams(window.location.search);
+    const paymentId = params.get("payment_id") || localStorage.getItem("mdl_last_payment_id");
+    const API_BASE = window.location.protocol === "file:"
+      ? `${"http://"}${"local"}${"host"}:${8000}/api`
+      : "/api";
+
+    function getSession() {
+      try { return JSON.parse(localStorage.getItem("mdl_session")); } catch { return null; }
+    }
+
+    function trackPaymentReturn(eventName, metadata = {}) {
+      const sessionId = localStorage.getItem("mdl_analytics_session") || `return_${Date.now()}`;
+      const anonymousId = localStorage.getItem("mdl_analytics_anonymous") || sessionId;
+      fetch(`${API_BASE}/analytics/events`, {
+        method: "POST",
+        credentials: "include",
+        keepalive: true,
+        headers: {"Content-Type": "application/json"},
+        body: JSON.stringify({
+          event_name: eventName,
+          session_id: sessionId,
+          anonymous_id: anonymousId,
+          page_url: window.location.href,
+          source: "payment_return",
+          entity_type: "payments",
+          entity_id: paymentId,
+          metadata,
+        }),
+      }).catch(() => {});
+    }
+
+    async function consultarPagamento() {
+      const statusEl = document.getElementById("paymentStatusText");
+      const productEl = document.getElementById("paymentProductText");
+      const subscriptionEl = document.getElementById("subscriptionText");
+      const messageEl = document.getElementById("returnMessage");
+      const session = getSession();
+
+      if (!paymentId) {
+        statusEl.textContent = "pagamento nao identificado";
+        messageEl.textContent = "Volte ao portal e abra seu perfil para conferir pagamentos e assinatura.";
+        return;
+      }
+      if (!session?.usuario) {
+        statusEl.textContent = "login necessario";
+        messageEl.textContent = "Entre na sua conta para consultar a liberacao do pagamento.";
+        return;
+      }
+
+      statusEl.textContent = "consultando...";
+      try {
+        const resp = await fetch(`${API_BASE}/payments/${paymentId}/status`, {
+          credentials: "include"
+        });
+        const data = await resp.json();
+        if (!resp.ok) {
+          statusEl.textContent = data.detail?.message || data.detail || "erro ao consultar";
+          return;
+        }
+        statusEl.textContent = data.payment?.status || "pendente";
+        productEl.textContent = data.payment?.product_name || data.payment?.tipo || "--";
+        subscriptionEl.textContent = data.assinatura
+          ? `${data.assinatura.status} - ${data.assinatura.plano || "plano"}`
+          : "sem assinatura ativa";
+        messageEl.textContent = data.payment?.status === "approved"
+          ? "Pagamento confirmado. Seu acesso ja foi atualizado."
+          : "O pagamento ainda esta aguardando confirmacao do webhook. Atualize em alguns segundos.";
+        if (data.payment?.status === "approved") {
+          sessionStorage.setItem(`mdl_payment_returned_${paymentId}`, "1");
+          trackPaymentReturn("payment_approved", {status: data.payment.status});
+          if (data.assinatura) {
+            trackPaymentReturn("subscription_started", {status: data.assinatura.status, plano: data.assinatura.plano || data.payment?.product_name});
+          }
+        } else if (["failed", "error", "refused", "cancelled", "expired"].includes(data.payment?.status)) {
+          trackPaymentReturn("payment_failed", {status: data.payment.status});
+        }
+      } catch {
+        statusEl.textContent = "servico indisponivel";
+      }
+    }
+
+    consultarPagamento();
+    setTimeout(consultarPagamento, 5000);
+  </script>
+</body>
+</html>
